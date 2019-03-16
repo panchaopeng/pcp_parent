@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.pcp</groupId>
+    <artifactId>pcp_parent</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>pcp_common</module>
+        <module>pcp_base</module>
+        <module>pcp_recruit</module>
+        <module>pcp_qa</module>
+        <module>pcp_article</module>
+        <module>pcp_gathering</module>
+        <module>pcp_spit</module>
+        <module>pcp_search</module>
+        <module>pcp_rabbitmq</module>
+        <module>pcp_user</module>
+        <module>pcp_rabbit_customer</module>
+        <module>pcp_eureka</module>
+        <module>friend</module>
+        <module>pcp_manager</module>
+        <module>pcp_web</module>
+    </modules>
+    <!--
+    pom 表示聚合模块
+    -->
+    <packaging>pom</packaging>
+
+    <name>pcp_parent</name>
+    <description>微服务Demo</description>
+
+    <!--
+    Spring Boot的父级依赖
+    一个特殊的starter，它用来提供相关的Maven默认依赖
+    使用它之后，常用的包依赖可以省去version标签
+    -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.1.3.RELEASE</version>
+        <!--
+        默认值为../pom.xml
+        查找顺序：relativePath元素中的地址–本地仓库–远程仓库
+        设定一个空值将始终从仓库中获取，不从本地路径获取，如<relativePath />
+        -->
+        <relativePath/>
+    </parent>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <!--
+        本地Maven已经设置了Java版本，所以这里就不用设置了
+        <java.version>1.8</java.version>
+        -->
+    </properties>
+
+    <!-- 引入Eureka服务发现与调用 -->
+    <!-- dependencyManagement 表示锁定该版本。与Spring boot2.x对应 -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Greenwich.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+
+    <dependencies>
+        <!--
+        开启SpringMVC
+        -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <!--
+       开启JUnit测试
+       -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <!--
+    官方推荐的固定写法：用来自动下载依赖
+    -->
+    <repositories>
+        <repository>
+            <id>spring-snapshots</id>
+            <name>Spring Snapshots</name>
+            <url>https://repo.spring.io/snapshot</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>spring-snapshots</id>
+            <name>Spring Snapshots</name>
+            <url>https://repo.spring.io/snapshot</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </pluginRepository>
+        <pluginRepository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+</project>

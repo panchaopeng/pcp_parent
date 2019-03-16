@@ -1,0 +1,25 @@
+server:
+  port: 9003 # 当前项目端口
+spring:
+  application:
+    name: pcp_qa # 指定当前项目名，以后用来项目间的相互调用
+  datasource: # 连接数据库需要的参数
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.200.129:3306/tensquare_qa?characterEncoding=utf-8
+    username: root
+    password: root
+  jpa: # 使用 jpa 与数据库进行交互
+    database: mysql # 数据库类型
+    show-sql: true # 显示sql语句
+jwt:
+  config:
+    key: itpcp
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:6868/eureka/ #交互地址
+  instance:
+    prefer-ip-address: true #部署到服务器上时，让模块之间可以跨域访问
+feign:
+  hystrix:
+    enabled: true

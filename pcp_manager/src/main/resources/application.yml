@@ -1,0 +1,25 @@
+server:
+  port: 9011
+spring:
+  application:
+    name: pcp-manager
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:6868/eureka/ #交互地址
+  instance:
+    prefer-ip-address: true #部署到服务器上时，让模块之间可以跨域访问
+zuul:
+  routes:
+    pcp-base: #基础
+      path: /base/** #配置请求URL的请求规则
+      serviceId: pcp-base #指定Eureka注册中心中的服务id
+    pcp-user: #用户
+      path: /user/** #配置请求URL的请求规则
+      serviceId: pcp-user #指定Eureka注册中心中的服务id
+    pcp-qa: #问答
+      path: /qa/** #配置请求URL的请求规则
+      serviceId: pcp-qa #指定Eureka注册中心中的服务id
+jwt:
+  config:
+    key: itpcp

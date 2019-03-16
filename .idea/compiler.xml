@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="friend" />
+        <module name="pcp_article" />
+        <module name="pcp_base" />
+        <module name="pcp_common" />
+        <module name="pcp_eureka" />
+        <module name="pcp_gathering" />
+        <module name="pcp_manager" />
+        <module name="pcp_qa" />
+        <module name="pcp_rabbit_customer" />
+        <module name="pcp_rabbitmq" />
+        <module name="pcp_recruit" />
+        <module name="pcp_search" />
+        <module name="pcp_spit" />
+        <module name="pcp_user" />
+        <module name="pcp_web" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="pcp_friend" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
