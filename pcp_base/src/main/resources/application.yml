@@ -11,6 +11,8 @@ spring:
   jpa: # 使用 jpa 与数据库进行交互
     database: mysql # 数据库类型
     show-sql: true # 显示sql语句
+  rabbitmq:
+    host: 192.168.200.129
 eureka:
   client:
     service-url:
