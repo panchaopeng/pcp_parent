@@ -1,0 +1,55 @@
+JDK配置：配置本地JDK
+
+Maven配置：
+
+使用idea自带的Maven或者自己下载好的Maven
+若使用自己下载的Maven，则需要配置仓库位置(maven/conf/setting.xml)
+
+（勾选 import Maven projects automatically
+  勾选 automatically download）
+Importing：配置本地JDK
+
+（不用每次都下载，而是使用上次下载好的，同时配置本地JDK）
+Runner: VM Options -DarchtypeCatalog=internal
+
+-------------类与方法的注释模板--------
+
+ 参考文章 https://www.cnblogs.com/liaojie970/p/6433581.html
+
+=====类注释===
+File---Setting----Editor----Code Style-----File and    Code  Templates--------Class
+
+#if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "")package ${PACKAGE_NAME};#end
+#parse("File Header.java")
+/**
+ * @program: ${PROJECT_NAME}
+ * @depict: ${depict}
+ * @author: PCP
+ * @create: ${YEAR}-${MONTH}-${DAY} ${HOUR}:${MINUTE}
+ */
+public class ${NAME} {
+}
+
+
+=====方法注释====
+Editor -> Live Templates -> 点击右边加号为自己添加一个Templates Group -> 然后选中自己的Group再次点击加号添加Live Templates 
+
+
+*
+ * @depict: 
+$param$
+ * @return: $return$ {@link $return$#}
+ * @author: PCP
+ * @create: $date$ $time$
+ */
+
+
+param不写表达式，写默认值为：
+groovyScript("def result=''; def params=\"${_1}\".replaceAll('[\\\\[|\\\\]|\\\\s]', '').split(',').toList(); for(i = 0; i < params.size(); i++) {result+=' * @param' + (i+1) + ': ' + params[i] + ' ' + ((i < params.size() - 1) ? '\\n':'')}; return result", methodParameters())
+
+设置右侧为Enter，并将该模板命名为*
+
+再添加一个模板为mc，模板内容为：/**
+
+使用方式：敲mc后再点击两次Enter就出现方法注释块了
+

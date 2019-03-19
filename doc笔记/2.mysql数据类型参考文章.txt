@@ -1,0 +1,50 @@
+https://www.cnblogs.com/-xlp/p/8617760.html
+https://blog.51cto.com/arthur376/2121160
+
+varchar(n):65535字节，0-64k。可变长度，最多65535个字符，对应Java的String
+1.使用utf-8字符编码集varchar最大长度是(65535-2)/3=21844个字符（超过255个字节会有2字节的额外占用空间开销，所以减2,如果是255以下,则减1）。
+2.使用 utf-8mb4字符集，mysql中使用 utf-8mb4 字符集一个字符占用4个字节，所以 varchar 最大长度是(65535-2)/4=16383 个字符（超过255个字节会有2字节的额外占用空间开销，所以减2,如果是255以下,则减1）。
+
+int(m):固定长度,4字节。m表示设置结果的宽度。设置的字符宽度只对数值长度不满足宽度时有效
+
+bigint(m)：固定长度,8字节。数据库中默认长度为20. 对应Java的Long
+
+text：0-64K。可变长度，最多65535个字符
+
+
+varchar 小于255byte  1byte overhead
+varchar 大于255byte  2byte overhead
+tinytext 0-255 1 byte overhead
+text 0-65535 byte 2 byte overhead
+mediumtext 0-16M  3 byte overhead
+longtext 0-4Gb 4byte overhead 
+
+由于varchar查询速度更快， 能用varchar的时候就不用text。
+
+1、 char长度固定， 即每条数据占用等长字节空间；适合用在身份证号码、手机号码等定。
+
+2、 varchar可变长度，可以设置最大长度；适合用在长度可变的属性。
+
+3、 text不设置长度， 当不知道属性的最大长度时，适合用text。
+
+ 
+
+按照查询速度： char最快， varchar次之，text最慢。
+
+
+--------datatime和timestamp
+两者都可用来表示YYYY-MM-DD HH:MM:SS[.fraction]类型的日期。
+1> 两者的存储方式不一样
+
+对于TIMESTAMP，它把客户端插入的时间从当前时区转化为UTC（世界标准时间）进行存储。查询时，将其又转化为客户端当前时区进行返回。
+
+而对于DATETIME，不做任何改变，基本上是原样输入和输出。
+
+
+
+
+
+
+
+
+
