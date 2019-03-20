@@ -20,13 +20,26 @@
 ### 1-1. 全局的返回结果实体类
 |实体类|说明|示意图|
 |:------:|:------:|:------:|
-|[Result](https://github.com/panchaopeng/pcp_parent/tree/master/pcp_common/src/main/java/entity/Result.java)|全局返回结果类||
-|[PageResult](https://github.com/panchaopeng/pcp_parent/tree/master/pcp_common/src/main/java/entity/PageResult.java)|通用的分页结果类||
-|[StatusCode](https://github.com/panchaopeng/pcp_parent/tree/master/pcp_common/src/main/java/entity/StatusCode.java)|返回码常量类||
-
-
+|[Result](https://github.com/panchaopeng/pcp_parent/tree/master/pcp_common/src/main/java/entity/Result.java)|全局返回结果类|![Result](https://github.com/panchaopeng/pcp_parent/blob/master/img/1.common.result.png)|
+|[PageResult](https://github.com/panchaopeng/pcp_parent/tree/master/pcp_common/src/main/java/entity/PageResult.java)|通用的分页结果类|![PageResult](https://github.com/panchaopeng/pcp_parent/blob/master/img/1.common.PageResult.png)|
+|[StatusCode](https://github.com/panchaopeng/pcp_parent/tree/master/pcp_common/src/main/java/entity/StatusCode.java)|返回码常量类|![StatusCode](https://github.com/panchaopeng/pcp_parent/blob/master/img/1.common.StatusCode.png)|  
 
 ### 1-2. 全部模块采用SpringMVC模式
+
+> - SpringMVC模式的好处，分工明确  
+> - Controller注入Service，Service注入Dao，Dao持久化PoJo  
+
+|SpringMVC|说明|示意图|
+|:------:|:----------:|:--------:|
+|xxxController|控制层注入Service| ![Result](https://github.com/panchaopeng/pcp_parent/blob/master/img/1.common.result.png)|
+|xxxService|服务层注入Dao| ![Result](https://github.com/panchaopeng/pcp_parent/blob/master/img/1.common.result.png)|
+|xxxDao|dao使用JPA持久化PoJo| ![Result](https://github.com/panchaopeng/pcp_parent/blob/master/img/1.common.result.png)|
+|xxxPoJo|某实体类| ![Result](https://github.com/panchaopeng/pcp_parent/blob/master/img/1.common.result.png)|
+
+
+
+
+
 ### 1-3. RESTful风格的CRUD操作与模块的统一异常处理
 ### 1-4. 基于twitter的snowflake（雪花）算法-分布式ID生成器
 
