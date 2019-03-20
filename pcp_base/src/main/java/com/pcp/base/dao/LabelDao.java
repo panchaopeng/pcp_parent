@@ -12,7 +12,9 @@ import org.springframework.data.repository.query.Param;
  * @author: PCP
  * @create: 2019-02-22 20:51
  */
-public interface LabelDao extends JpaRepository<Label,String>, JpaSpecificationExecutor<Label> {
+public interface LabelDao extends
+        JpaRepository<Label,String>,
+        JpaSpecificationExecutor<Label> {
 
 
     @Modifying
