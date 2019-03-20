@@ -6,7 +6,6 @@ package entity;
  * @create: 2019-02-21 20:18
  */
 public class StatusCode {
-
     public static final int OK = 20000;//成功
     public static final int ERROR = 20001;//失败
     public static final int LOGIN_ERROR = 20002;//用户名或密码错误
