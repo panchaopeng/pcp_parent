@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 public class BaseExceptionHandler {
-
     @ExceptionHandler(value = Exception.class)
-    public Result exception(Exception e){
-        return new Result(false,StatusCode.ERROR,e.getMessage()+e.getMessage());
+    public Result exception(Exception e) {
+        return new Result(false, StatusCode.ERROR,
+                e.getMessage() + e.getMessage());
     }
 }
