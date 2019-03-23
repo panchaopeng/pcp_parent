@@ -34,7 +34,7 @@
 > - SpringMVC模式的好处，分工明确  
 > - Controller注入Service，Service注入Dao，Dao持久化PoJo  
 
-|SpringMVC|说明|示意图|
+|SpringMVC层级|说明|示意图|
 |:------:|:----------:|:--------:|
 |SpringMVC|结构图|![Result](https://github.com/panchaopeng/pcp_parent/blob/master/img/common/springMVC.png)||
 |xxxController|控制层注入Service| ![Result](https://github.com/panchaopeng/pcp_parent/blob/master/img/common/1.common.Controller.png	)|
