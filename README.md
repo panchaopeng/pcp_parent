@@ -164,6 +164,7 @@
 
 ## 5.SpringDataElasticsearch  
 
+> - 具体配置查看[2.配置容器.docx](https://github.com/panchaopeng/pcp_parent/tree/master/doc笔记/2.配置容器.docx)中的Elasticsearch内容
 > - 实时的分布式搜索和分析引擎
 > - 使用[logstash](https://www.elastic.co/downloads/logstash)完成mysql与Elasticsearch的同步工作
 > - [Head插件](https://github.com/mobz/elasticsearch-head),图形化界面来实现Elasticsearch的日常管理
@@ -171,7 +172,7 @@
 
 |对比图|
 |:--------:|
-|![对比图](https://github.com/panchaopeng/pcp_parent/blob/master/img/mongodb/Mongodb.png)|  
+|![对比图](https://github.com/panchaopeng/pcp_parent/blob/master/img/elasticsearch/compare.png)|  
 
 ### 5-1.SpringDataElasticsearch依赖与配置
 
@@ -186,7 +187,7 @@
 
 |application.yml配置|
 |:----:|
-|![Elasticsearchyml](https://github.com/panchaopeng/pcp_parent/blob/master/img/mongodb/yml.png)|  
+|![Elasticsearchyml](https://github.com/panchaopeng/pcp_parent/blob/master/img/elasticsearch/yml.png)|  
   
 ### 5-2.SpringDataElasticsearch使用  
 
@@ -194,16 +195,104 @@
 
 |区别|示意图|
 |:------:|:------:|
-|POJO类书写,具体查看文件[Article](https://github.com/panchaopeng/pcp_parent/blob/master/pcp_search/src/main/java/com/pcp/search/pojo/Article.java)|![MongoDByml](https://github.com/panchaopeng/pcp_parent/blob/master/img/mongodb/mongoTemplate.png)|
-|Elasticsearch的DAO类继承ElasticsearchRepository|![ElasticsearchRepository](https://github.com/panchaopeng/pcp_parent/blob/master/img/mongodb/id.png)|  
+|POJO类书写,具体查看文件[Article](https://github.com/panchaopeng/pcp_parent/blob/master/pcp_search/src/main/java/com/pcp/search/pojo/Article.java)|![entity.png](https://github.com/panchaopeng/pcp_parent/blob/master/img/elasticsearch/entity.png)|
+|Elasticsearch的DAO类继承ElasticsearchRepository|![ElasticsearchRepository](https://github.com/panchaopeng/pcp_parent/blob/master/img/elasticsearch/dao.png)|  
 
 ### 5-3.SpringDataElasticsearch搜索例子
 
 |SpringMVC层|示意图|
 |:------:|:------:|
-|DAO层|![DAO](https://github.com/panchaopeng/pcp_parent/blob/master/img/mongodb/mongoTemplate.png)|
-|Service层|![Service](https://github.com/panchaopeng/pcp_parent/blob/master/img/mongodb/mongoTemplate.png)|
-|Controller层|![Controlle](https://github.com/panchaopeng/pcp_parent/blob/master/img/mongodb/mongoTemplate.png)|  
+|DAO层|![DAO](https://github.com/panchaopeng/pcp_parent/blob/master/img/elasticsearch/dao.png)|
+|Service层|![Service](https://github.com/panchaopeng/pcp_parent/blob/master/img/elasticsearch/search_service.png)|
+|Controller层|![Controlle](https://github.com/panchaopeng/pcp_parent/blob/master/img/elasticsearch/search_controller.png)|  
+
+##
+
+## 6.RabbitMQ
+
+> - 消息队列中间件 异步处理 
+> - RabbitMQ有四种模式，常用三种：直接模式（Direct）、分列模式(Fanout)、主题模式（Topic）
+> - RabbitMQ架构：
+>> - PS：**使用RabbitMQ前先创建好队列**  
+>> - RabbitMQ Server:一种传输服务。维护一条从Producer到Consumer的路线，保证数据按照指定方式进行传输
+>> - A B C ：消息生产者-Producer
+>> - Exchange-交换器，将消息路由到一个或多个Queue中（或者丢弃）
+>> - RoutingKey-指定消息的路由规则,使消息流向某个/多个队列
+>> - 1 2 3 :Consumer-消息消费者  
+
+
+|RabbitMQ架构图|
+|:------:|
+|![RabbitMQ](https://github.com/panchaopeng/pcp_parent/blob/master/img/RabbitMQ/mq_server.png)|  
+
+### 6-1.RabbitMQ依赖与配置
+
+
+```
+        <!-- RabbitMQ -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
+```  
+
+|application.yml配置|
+|:----:|
+|![RabbitMQ](https://github.com/panchaopeng/pcp_parent/blob/master/img/RabbitMQ/yml.png)|  
+
+
+### 6-2.RabbitMQ-直接模式(Direct)
+
+> - 具体查看文件：[消息生产者](https://github.com/panchaopeng/pcp_parent/blob/master/pcp_rabbitmq/src/test/java/com/pcp/test/ProducerTest.java),[消息消费者](https://github.com/panchaopeng/pcp_parent/tree/master/pcp_rabbitmq/src/main/java/com/pcp/rabbit/com/pcp/rabbit/customer)  
+> - 直接模式（Direct）：将消息发给唯一一个节点时使用这种模式
+>> - 自带的Exchange：”"(该Exchange的名字为空字符串)
+>> - 需要一个“RouteKey”，可以简单的理解为要发送到的队列名字
+>> - 如果vhost中不存在RouteKey中指定的队列名，则该消息会被抛弃  
+
+|说明|示意图|
+|:----:|:----:|
+|消息生产者|![消息生产者](https://github.com/panchaopeng/pcp_parent/blob/master/img/RabbitMQ/direct_producer.png)|
+|消息消费者|![消息消费者](https://github.com/panchaopeng/pcp_parent/blob/master/img/RabbitMQ/direct_consumer.png)|  
+
+
+### 6-3.RabbitMQ-分列模式(Fanout)
+
+> - PS:此时已经新建路由ex_it，并绑定了itcast2和itcast3两个队列  
+> - 分列模式(Fanout)
+>> - 将消息一次发给多个队列
+>> - 这种模式不需要RouteKey
+>> - 需要提前将Exchange与Queue进行绑定
+>> - 如果接受到消息的Exchange没有与任何Queue绑定，则消息会被抛弃
+
+
+|说明|示意图|
+|:----:|:----:|
+|消息生产者|![消息生产者](https://github.com/panchaopeng/pcp_parent/blob/master/img/RabbitMQ/fanout_pro.png)|
+|消息消费者|![消息消费者](https://github.com/panchaopeng/pcp_parent/blob/master/img/RabbitMQ/fanout_con1.png)|
+|消息消费者|![消息消费者](https://github.com/panchaopeng/pcp_parent/blob/master/img/RabbitMQ/fanout_con2.png)|  
+
+
+### 6-4.RabbitMQ-主题模式(Topic)
+
+> - 主题模式(Topic)
+>> - 任何发送到Topic Exchange的消息都会被转发到所有关心RouteKey中指定话题的Queue上
+>> - 就是模糊匹配的意思。使用前指定binding key=usa.#/#.log.#等。然后使用时模糊匹配routingKey.
+>>> - #代表匹配任意字符
+>>> - \*(星号转义，不然github代表粗体)代表一个字符
+>> - 这种模式需要RouteKey，也许要提前绑定Exchange与Queue
+>> - 如果Exchange没有发现能够与RouteKey匹配的Queue，则会抛弃此消息
+
+|说明|示意图|
+|:----:|:----:|
+|队列创建与匹配|![队列创建与匹配](https://github.com/panchaopeng/pcp_parent/blob/master/img/RabbitMQ/topic_exchange.png)|
+|消息生产者|![消息生产者](https://github.com/panchaopeng/pcp_parent/blob/master/img/RabbitMQ/topic_con1.png)|
+|消息消费者|![消息消费者](https://github.com/panchaopeng/pcp_parent/blob/master/img/RabbitMQ/topic_con2.png)|
+|消息消费者|![消息消费者](https://github.com/panchaopeng/pcp_parent/blob/master/img/RabbitMQ/topic_con3.png)|  
+
+
+
+
+
 
 
 
