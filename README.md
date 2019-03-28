@@ -67,6 +67,7 @@
 
 > - SpringDataJPA简化了实体类的CRUD操作。   
 
+### 2-1.SpringDataJPA依赖与配置  
 ```
 	<!-- Spring Data JPA依赖 -->
         <dependency>
@@ -85,6 +86,7 @@
 |:----:|
 |![JPAyml](https://github.com/panchaopeng/pcp_parent/blob/master/img/jpa/yml.png)|  
 
+### 2-2.SpringDataJPA使用  
 
 |说明|示意图或备注|
 |:-------:|:--------:|
@@ -99,6 +101,8 @@
 
 > - RedisTemplate提供了redis各种操作。  
 
+### 3-1.SpringDataRedis依赖与配置  
+
 ```
 	<!-- SpringDataRedis依赖 -->
     	<dependency>
@@ -112,6 +116,7 @@
 |:----:|
 |![Redisyml](https://github.com/panchaopeng/pcp_parent/blob/master/img/redis/yml.png)|  
 
+### 3-2.SpringDataRedis使用  
 
 |说明|示意图或备注|
 |:-------:|:--------:|
@@ -127,6 +132,12 @@
 > - 介于关系数据库和非关系数据库之间，非关系数据库当中最像关系数据库的产品
 > - 适合 数据量大 写入操作频繁 价值较低 的评论功能场景  
 
+|对比图|
+|:--------:|
+|![对比图](https://github.com/panchaopeng/pcp_parent/blob/master/img/mongodb/Mongodb.png)|  
+
+### 4-1.SpringDataMongoDB依赖与配置  
+
 ```
 	<!-- SpringDataMongoDB依赖 -->
 	<dependency>
@@ -139,9 +150,9 @@
 |:----:|
 |![MongoDByml](https://github.com/panchaopeng/pcp_parent/blob/master/img/mongodb/yml.png)|  
   
-|对比图|
-|:--------:|
-|![对比图](https://github.com/panchaopeng/pcp_parent/blob/master/img/mongodb/Mongodb.png)|  
+### 4-2.SpringDataMongoDB使用  
+
+
 
 
 
