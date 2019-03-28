@@ -83,7 +83,7 @@
             <version>8.0.14</version>
         </dependency>
 ```
-|![yml](https://github.com/panchaopeng/pcp_parent/blob/master/img/common/snowflake.png)|  
+|![yml](https://github.com/panchaopeng/pcp_parent/tree/master/img/jpa/yml.png)|  
 
 
 |说明|示意图或备注|
@@ -110,7 +110,7 @@
 	</dependency>
 	
 ```
-|![yml](https://github.com/panchaopeng/pcp_parent/blob/master/img/common/snowflake.png)|  
+|![yml](https://github.com/panchaopeng/pcp_parent/tree/master/img/redis/yml.png)|  
 
 
 |说明|示意图或备注|
@@ -137,11 +137,11 @@
             <artifactId>spring‐boot‐starter‐data‐mongodb</artifactId>
         </dependency>
 ```
-|![yml](https://github.com/panchaopeng/pcp_parent/blob/master/img/common/snowflake.png)|  
+|![yml](https://github.com/panchaopeng/pcp_parent/tree/master/img/mongodb/yml.png)|  
   
 |对比图|
 |:--------:|
-|![对比图](https://github.com/panchaopeng/pcp_parent/blob/master/img/redis/use.png)|  
+|![对比图](https://github.com/panchaopeng/pcp_parent/tree/master/img/mongodb/Mongodb.png)|  
 
 
 
