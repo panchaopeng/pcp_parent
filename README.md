@@ -63,27 +63,21 @@
 
 ## 2.Spring Data JPA  
 
-> - SpringDataJPA简化了实体类的CRUD操作。  
-
-|依赖|代码|
-|:---------:|:-------:|
-|SpringDataJPA|
+> - SpringDataJPA简化了实体类的CRUD操作。   
 ```
+	<!-- Spring Data JPA依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
-```
-|
-|mysql数据库|
-```
+	<!-- mysql依赖 -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.14</version>
         </dependency>
 ```
-|  
+  
 
 
 |说明|示意图或备注|
@@ -97,23 +91,22 @@
 
 > - RedisTemplate提供了redis各种操作。  
 
-|依赖|代码|
-|:---------:|:---------:|
-|SpringDataRedis|
 ```
-    <dependency>
-		  <groupId>org.springframework.boot</groupId>
-		  <artifactId>spring-boot-starter-data-redis</artifactId>
-	  </dependency>
+	<!-- SpringDataRedis依赖 -->
+    	<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-data-redis</artifactId>
+	</dependency>
 ```
-|  
+  
+  
 
 |说明|示意图或备注|
 |:-------:|:--------:|
 |常用的使用方法|[SpringDataRedis](https://github.com/panchaopeng/pcp_parent/blob/master/doc笔记/3.SpringDataRedis使用说明.txt)|
 |使用前注入RedisTemplate|![RedisTemplate](https://github.com/panchaopeng/pcp_parent/blob/master/img/redisTemplate.png)|
-|查询时缓存|![查询](https://github.com/panchaopeng/pcp_parent/blob/master/img/use.png)|
-|修改或删除后清除缓存|![update_delete](https://github.com/panchaopeng/pcp_parent/blob/master/img/update_delete.png)|  
+|查询时缓存|![查询](https://github.com/panchaopeng/pcp_parent/tree/blob/master/img/use.png)|
+|修改或删除后清除缓存|![update_delete](https://github.com/panchaopeng/pcp_parent/tree/blob/master/img/update_delete.png)|  
 
 
 
