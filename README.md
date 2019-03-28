@@ -99,9 +99,6 @@
 
 > - RedisTemplate提供了redis各种操作。  
 
-|依赖|application.yml配置|
-|:----:|:----:|
-|
 ```
 	<!-- SpringDataRedis依赖 -->
     	<dependency>
@@ -110,6 +107,9 @@
 	</dependency>
 	
 ```
+
+|application.yml配置|
+|:----:|
 |![yml](https://github.com/panchaopeng/pcp_parent/tree/master/img/redis/yml.png)|  
 
 
@@ -127,9 +127,6 @@
 > - 介于关系数据库和非关系数据库之间，非关系数据库当中最像关系数据库的产品
 > - 适合 数据量大 写入操作频繁 价值较低 的评论功能场景  
 
-|依赖|application.yml配置|
-|:----:|:----:|
-|
 ```
 	<!-- SpringDataMongoDB依赖 -->
 	<dependency>
@@ -137,6 +134,9 @@
             <artifactId>spring‐boot‐starter‐data‐mongodb</artifactId>
         </dependency>
 ```
+
+|application.yml配置|
+|:----:|
 |![yml](https://github.com/panchaopeng/pcp_parent/tree/master/img/mongodb/yml.png)|  
   
 |对比图|
