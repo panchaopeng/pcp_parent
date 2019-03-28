@@ -158,7 +158,7 @@
 |:------:|:------:|
 |使用前注入MongoTemplate|![MongoDByml](https://github.com/panchaopeng/pcp_parent/blob/master/img/mongodb/id.png)|
 |MongoDB实体类中id(必须为_id)|![id](https://github.com/panchaopeng/pcp_parent/blob/master/img/mongodb/id.png)|
-|MongoDB的POJO中继承MongoRepository|![MongoRepository](https://github.com/panchaopeng/pcp_parent/blob/master/img/mongodb/mongoTemplate.png.png)|
+|MongoDB的POJO中继承MongoRepository|![MongoRepository](https://github.com/panchaopeng/pcp_parent/blob/master/img/mongodb/mongoTemplate.png)|
 
 
 
