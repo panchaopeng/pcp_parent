@@ -152,21 +152,58 @@
   
 ### 4-2.SpringDataMongoDB使用  
 
-> - SpringDataMongoDB的使用与SpringDataJPA的使用几乎没有区别  
+> - SpringDataMongoDB的*CRUD*使用与SpringDataJPA的*CRUD*使用几乎没有区别  
 
 |区别|示意图|
 |:------:|:------:|
-|使用前注入MongoTemplate|![MongoDByml](https://github.com/panchaopeng/pcp_parent/blob/master/img/mongodb/id.png)|
+|使用前注入MongoTemplate|![mongoTemplate](https://github.com/panchaopeng/pcp_parent/blob/master/img/mongodb/mongoTemplate.png)|
 |MongoDB实体类中id(必须为_id)|![id](https://github.com/panchaopeng/pcp_parent/blob/master/img/mongodb/id.png)|
-|MongoDB的POJO中继承MongoRepository|![MongoRepository](https://github.com/panchaopeng/pcp_parent/blob/master/img/mongodb/mongoTemplate.png.png)|
+|MongoDB的DAO中继承MongoRepository|![MongoRepository](https://github.com/panchaopeng/pcp_parent/blob/master/img/mongodb/pojo.png)|  
 
+##
 
+## 5.SpringDataElasticsearch  
 
+> - 实时的分布式搜索和分析引擎
+> - 使用[logstash](https://www.elastic.co/downloads/logstash)完成mysql与Elasticsearch的同步工作
+> - [Head插件](https://github.com/mobz/elasticsearch-head),图形化界面来实现Elasticsearch的日常管理
+> - [IK分词器](https://github.com/medcl/elasticsearch-analysis-ik/releases),符合中文语法的简单分词器
 
+|对比图|
+|:--------:|
+|![对比图](https://github.com/panchaopeng/pcp_parent/blob/master/img/mongodb/Mongodb.png)|  
 
+### 5-1.SpringDataElasticsearch依赖与配置
 
+```
+	<!-- 使用分布式搜索服务 -->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-elasticsearch</artifactId>
+            <version>3.1.5.RELEASE</version>
+        </dependency>
+```  
 
+|application.yml配置|
+|:----:|
+|![Elasticsearchyml](https://github.com/panchaopeng/pcp_parent/blob/master/img/mongodb/yml.png)|  
+  
+### 5-2.SpringDataElasticsearch使用  
 
+> - SpringDataElasticsearch的*CRUD*使用与SpringDataJPA的*CRUD*使用几乎没有区别  
+
+|区别|示意图|
+|:------:|:------:|
+|POJO类书写,具体查看文件[Article](https://github.com/panchaopeng/pcp_parent/blob/master/pcp_search/src/main/java/com/pcp/search/pojo/Article.java)|![MongoDByml](https://github.com/panchaopeng/pcp_parent/blob/master/img/mongodb/mongoTemplate.png)|
+|Elasticsearch的DAO类继承ElasticsearchRepository|![ElasticsearchRepository](https://github.com/panchaopeng/pcp_parent/blob/master/img/mongodb/id.png)|  
+
+### 5-3.SpringDataElasticsearch搜索例子
+
+|SpringMVC层|示意图|
+|:------:|:------:|
+|DAO层|![DAO](https://github.com/panchaopeng/pcp_parent/blob/master/img/mongodb/mongoTemplate.png)|
+|Service层|![Service](https://github.com/panchaopeng/pcp_parent/blob/master/img/mongodb/mongoTemplate.png)|
+|Controller层|![Controlle](https://github.com/panchaopeng/pcp_parent/blob/master/img/mongodb/mongoTemplate.png)|  
 
 
 
