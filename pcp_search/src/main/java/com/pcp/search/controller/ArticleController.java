@@ -33,6 +33,8 @@ public class ArticleController {
                                                   @PathVariable int page,
                                                   @PathVariable int size){
         Page<Article> articlePage = articleService.findByTitleOrContentLike(key, page, size);
-        return new Result(true,StatusCode.OK,"查询成功",new PageResult<Article>(articlePage.getTotalElements(),articlePage.getContent()));
+        return new Result(true,StatusCode.OK,"查询成功",
+                new PageResult<Article>(articlePage.getTotalElements(),
+                        articlePage.getContent()));
     }
 }
