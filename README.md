@@ -171,7 +171,7 @@
 
 |对比图|
 |:--------:|
-|![对比图](https://github.com/panchaopeng/pcp_parent/master/img/elasticsearch/compare.png)|  
+|![对比图](https://github.com/panchaopeng/pcp_parent/blob/master/img/elasticsearch/compare.png)|  
 
 ### 5-1.SpringDataElasticsearch依赖与配置
 
@@ -186,7 +186,7 @@
 
 |application.yml配置|
 |:----:|
-|![Elasticsearchyml](https://github.com/panchaopeng/pcp_parent/master/img/elasticsearch/compare.png)|  
+|![Elasticsearchyml](https://github.com/panchaopeng/pcp_parent/blob/master/img/elasticsearch/compare.png)|  
   
 ### 5-2.SpringDataElasticsearch使用  
 
@@ -194,16 +194,16 @@
 
 |区别|示意图|
 |:------:|:------:|
-|POJO类书写,具体查看文件[Article](https://github.com/panchaopeng/pcp_parent/blob/master/pcp_search/src/main/java/com/pcp/search/pojo/Article.java)|![entity.png](https://github.com/panchaopeng/pcp_parent/master/img/elasticsearch/entity.png)|
-|Elasticsearch的DAO类继承ElasticsearchRepository|![ElasticsearchRepository](https://github.com/panchaopeng/pcp_parent/master/img/elasticsearch/dao.png)|  
+|POJO类书写,具体查看文件[Article](https://github.com/panchaopeng/pcp_parent/blob/master/pcp_search/src/main/java/com/pcp/search/pojo/Article.java)|![entity.png](https://github.com/panchaopeng/pcp_parent/blob/master/img/elasticsearch/entity.png)|
+|Elasticsearch的DAO类继承ElasticsearchRepository|![ElasticsearchRepository](https://github.com/panchaopeng/pcp_parent/blob/master/img/elasticsearch/dao.png)|  
 
 ### 5-3.SpringDataElasticsearch搜索例子
 
 |SpringMVC层|示意图|
 |:------:|:------:|
-|DAO层|![DAO](https://github.com/panchaopeng/pcp_parent/master/img/elasticsearch/dao.png)|
-|Service层|![Service](https://github.com/panchaopeng/pcp_parent/master/img/elasticsearch/search_service.png)|
-|Controller层|![Controlle](https://github.com/panchaopeng/pcp_parent/master/img/elasticsearch/search_controller.png)|  
+|DAO层|![DAO](https://github.com/panchaopeng/pcp_parent/blob/master/img/elasticsearch/dao.png)|
+|Service层|![Service](https://github.com/panchaopeng/pcp_parent/blob/master/img/elasticsearch/search_service.png)|
+|Controller层|![Controlle](https://github.com/panchaopeng/pcp_parent/blob/master/img/elasticsearch/search_controller.png)|  
 
 
 
