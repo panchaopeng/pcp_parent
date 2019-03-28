@@ -111,8 +111,9 @@
 |说明|示意图或备注|
 |:-------:|:--------:|
 |常用的使用方法|[SpringDataRedis](https://github.com/panchaopeng/pcp_parent/blob/master/doc笔记/3.SpringDataRedis使用说明.txt)|
-|查询时缓存|![SpringDataRedis](https://github.com/panchaopeng/pcp_parent/blob/master/doc笔记/3.SpringDataRedis使用说明.txt)|
-|修改或删除后清除缓存|![SpringDataRedis](https://github.com/panchaopeng/pcp_parent/blob/master/doc笔记/3.SpringDataRedis使用说明.txt)|  
+|使用前注入RedisTemplate|![RedisTemplate](https://github.com/panchaopeng/pcp_parent/blob/master/img/redisTemplate.png)|
+|查询时缓存|![查询](https://github.com/panchaopeng/pcp_parent/blob/master/img/use.png)|
+|修改或删除后清除缓存|![update_delete](https://github.com/panchaopeng/pcp_parent/blob/master/img/update_delete.png)|  
 
 
 
