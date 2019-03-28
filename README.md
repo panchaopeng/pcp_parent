@@ -186,7 +186,7 @@
 
 |application.yml配置|
 |:----:|
-|![Elasticsearchyml](https://github.com/panchaopeng/pcp_parent/blob/master/img/elasticsearch/compare.png)|  
+|![Elasticsearchyml](https://github.com/panchaopeng/pcp_parent/blob/master/img/elasticsearch/yml.png)|  
   
 ### 5-2.SpringDataElasticsearch使用  
 
