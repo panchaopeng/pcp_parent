@@ -21,7 +21,7 @@
 
 ## 1.关于后台公共模块
 
-### 1-1. 全局的返回结果实体类
+### 1-1.全局的返回结果实体类
 
 |实体类|说明|示意图|
 |:------:|:------:|:------:|
@@ -29,25 +29,43 @@
 |[PageResult](https://github.com/panchaopeng/pcp_parent/tree/master/pcp_common/src/main/java/entity/PageResult.java)|通用的分页结果类|![PageResult](https://github.com/panchaopeng/pcp_parent/blob/master/img/common/1.common.PageResult.png)|
 |[StatusCode](https://github.com/panchaopeng/pcp_parent/tree/master/pcp_common/src/main/java/entity/StatusCode.java)|返回码常量类|![StatusCode](https://github.com/panchaopeng/pcp_parent/blob/master/img/common/1.common.StatusCode.png)|  
 
-### 1-2. 全部模块采用SpringMVC模式
+### 1-2.全部模块采用SpringMVC模式
 
 > - SpringMVC模式的好处，分工明确  
 > - Controller注入Service，Service注入Dao，Dao持久化PoJo  
 
-|SpringMVC|说明|示意图|
+|SpringMVC层级|说明|示意图|
 |:------:|:----------:|:--------:|
 |SpringMVC|结构图|![Result](https://github.com/panchaopeng/pcp_parent/blob/master/img/common/springMVC.png)||
 |xxxController|控制层注入Service| ![Result](https://github.com/panchaopeng/pcp_parent/blob/master/img/common/1.common.Controller.png	)|
 |xxxService|服务层注入Dao| ![Result](https://github.com/panchaopeng/pcp_parent/blob/master/img/common/1.common.Service.png)|
 |xxxDao|dao使用JPA持久化PoJo| ![Result](https://github.com/panchaopeng/pcp_parent/blob/master/img/common/1.common.dao.png)|
 |xxxPoJo|某实体类| ![Result](https://github.com/panchaopeng/pcp_parent/blob/master/img/common/1.common.pojo.png)|
-|BaseExceptionHandler|模块的统一异常处理|![BaseExceptionHandler](https://github.com/panchaopeng/pcp_parent/blob/master/img/common/1.common.exception.png)|
+|BaseExceptionHandler|模块的统一异常处理|![BaseExceptionHandler](https://github.com/panchaopeng/pcp_parent/blob/master/img/common/1.common.exception.png)|  
 
-### 1-4. 基于twitter的snowflake（雪花）算法-分布式ID生成器
+### 1-3.基于twitter的snowflake（雪花）算法-分布式ID生成器
 
+> - 为什么要使用**分布式ID生成器**？为什么不使用数据库的本身的自增ID？
+>> - 因为微服务大多数都触及分布式开发，需要确保整个分布式系统内不产生重复的ID
+> - 分布式ID生成器**优点**:
+>> - 生成ID时不依赖数据库，完全在内存生成，高性能高可用
+>> - ID呈趋势递增,插入索引树的时候性能较好
 
+#### snowflake
+> - 首字节为0，无用。  
+> - 41字节时间戳，能容纳69年
+> - 10字节工作机器id，能容纳1024节点  
+> - 12字节序列号，每毫秒每节点能自增4096个id  
 
+|名称|说明|示意图|
+|:---------:|:--------:|:--------:|
+|snowflake（雪花）算法|java版分布式ID生成器每毫秒能生成26万多个id,能使用69年|![snowflake](https://github.com/panchaopeng/pcp_parent/blob/master/img/common/snowflake.png)|
 
-
-
+## 2.Spring Data JPA
+> - SpringDataJPA简化了实体类的CRUD操作。
+|说明|示意图|
+|:-------:|:--------:|
+|接口关系||
+|复杂查询接口||
+|原生SQL||
 
