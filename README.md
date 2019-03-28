@@ -164,6 +164,7 @@
 
 ## 5.SpringDataElasticsearch  
 
+> - 具体配置查看[2.配置容器.docx](https://github.com/panchaopeng/pcp_parent/tree/master/doc笔记/2.配置容器.docx)中的Elasticsearch内容
 > - 实时的分布式搜索和分析引擎
 > - 使用[logstash](https://www.elastic.co/downloads/logstash)完成mysql与Elasticsearch的同步工作
 > - [Head插件](https://github.com/mobz/elasticsearch-head),图形化界面来实现Elasticsearch的日常管理
