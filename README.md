@@ -61,11 +61,58 @@
 |:---------:|:--------:|:--------:|
 |snowflake（雪花）算法|java版分布式ID生成器每毫秒能生成26万多个id,能使用69年|![snowflake](https://github.com/panchaopeng/pcp_parent/blob/master/img/common/snowflake.png)|
 
-## 2.Spring Data JPA
-> - SpringDataJPA简化了实体类的CRUD操作。
-|说明|示意图|
+## 2.Spring Data JPA  
+
+> - SpringDataJPA简化了实体类的CRUD操作。  
+
+|依赖|代码|
+|:---------:|:-------:|
+|SpringDataJPA|
+```
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+```
+|
+|mysql数据库|
+```
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.14</version>
+        </dependency>
+```
+|  
+
+
+|说明|示意图或备注|
 |:-------:|:--------:|
-|接口关系||
-|复杂查询接口||
-|原生SQL||
+|接口关系|![Result](https://github.com/panchaopeng/pcp_parent/blob/master/img/jpa/jpa.png)|
+|复杂查询接口|JpaSpecificationExecutor|
+|解析方法名创建查询|一般不好维护，建议用原生sql|
+|原生SQL|![Result](https://github.com/panchaopeng/pcp_parent/blob/master/img/jpa/sql.png)|  
+
+## 3.Spring Data Redis  
+
+> - RedisTemplate提供了redis各种操作。  
+
+|依赖|代码|
+|:---------:|:---------:|
+|SpringDataRedis|
+```
+    <dependency>
+		  <groupId>org.springframework.boot</groupId>
+		  <artifactId>spring-boot-starter-data-redis</artifactId>
+	  </dependency>
+```
+|  
+
+|说明|示意图或备注|
+|:-------:|:--------:|
+|常用的使用方法|[SpringDataRedis](https://github.com/panchaopeng/pcp_parent/blob/master/doc笔记/3.SpringDataRedis使用说明.txt)|
+|查询时缓存|![SpringDataRedis](https://github.com/panchaopeng/pcp_parent/blob/master/doc笔记/3.SpringDataRedis使用说明.txt)|
+|修改或删除后清除缓存|![SpringDataRedis](https://github.com/panchaopeng/pcp_parent/blob/master/doc笔记/3.SpringDataRedis使用说明.txt)|  
+
+
 
