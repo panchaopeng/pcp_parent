@@ -156,8 +156,8 @@
 
 |区别|示意图|
 |:------:|:------:|
-|MongoDB实体类中id(必须为_id)|![MongoDByml](https://github.com/panchaopeng/pcp_parent/blob/master/img/mongodb/yml.png)|
-|MongoDB的POJO中继承MongoRepository|![MongoDByml](https://github.com/panchaopeng/pcp_parent/blob/master/img/mongodb/yml.png)|
+|MongoDB实体类中id(必须为_id)|![MongoDByml](https://github.com/panchaopeng/pcp_parent/blob/master/img/mongodb/id.png)|
+|MongoDB的POJO中继承MongoRepository|![MongoDByml](https://github.com/panchaopeng/pcp_parent/blob/master/img/mongodb/pojo.png)|
 
 
 
