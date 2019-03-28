@@ -141,7 +141,7 @@
   
 |对比图|
 |:--------:|
-|![对比图](https://github.com/panchaopeng/pcp_parent/tree/master/img/mongodb/Mongodb.png)|  
+|![对比图](https://github.com/panchaopeng/pcp_parent/blob/master/img/mongodb/Mongodb.png)|  
 
 
 
