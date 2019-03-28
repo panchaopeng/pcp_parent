@@ -61,9 +61,15 @@
 |:---------:|:--------:|:--------:|
 |snowflake（雪花）算法|java版分布式ID生成器每毫秒能生成26万多个id,能使用69年|![snowflake](https://github.com/panchaopeng/pcp_parent/blob/master/img/common/snowflake.png)|
 
+##
+
 ## 2.Spring Data JPA  
 
 > - SpringDataJPA简化了实体类的CRUD操作。   
+
+|依赖|application.yml配置|
+|:----:|:----:|
+|
 ```
 	<!-- Spring Data JPA依赖 -->
         <dependency>
@@ -77,7 +83,7 @@
             <version>8.0.14</version>
         </dependency>
 ```
-  
+|![yml](https://github.com/panchaopeng/pcp_parent/blob/master/img/common/snowflake.png)|  
 
 
 |说明|示意图或备注|
@@ -87,19 +93,25 @@
 |解析方法名创建查询|一般不好维护，建议用原生sql|
 |原生SQL|![Result](https://github.com/panchaopeng/pcp_parent/blob/master/img/jpa/sql.png)|  
 
+##
+
 ## 3.Spring Data Redis  
 
 > - RedisTemplate提供了redis各种操作。  
 
+|依赖|application.yml配置|
+|:----:|:----:|
+|
 ```
 	<!-- SpringDataRedis依赖 -->
     	<dependency>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-data-redis</artifactId>
 	</dependency>
+	
 ```
-  
-  
+|![yml](https://github.com/panchaopeng/pcp_parent/blob/master/img/common/snowflake.png)|  
+
 
 |说明|示意图或备注|
 |:-------:|:--------:|
@@ -107,6 +119,54 @@
 |使用前注入RedisTemplate|![RedisTemplate](https://github.com/panchaopeng/pcp_parent/blob/master/img/redis/redisTemplate.png)|
 |查询时缓存|![查询](https://github.com/panchaopeng/pcp_parent/blob/master/img/redis/use.png)|
 |修改或删除后清除缓存|![update_delete](https://github.com/panchaopeng/pcp_parent/blob/master/img/redis/update_or_delete.png)|  
+
+##  
+
+## 4.SpringDataMongoDB  
+> - 操作MongoDB的持久层框架，封装了底层的mongodb-driver
+> - 介于关系数据库和非关系数据库之间，非关系数据库当中最像关系数据库的产品
+> - 适合 数据量大 写入操作频繁 价值较低 的评论功能场景  
+
+|依赖|application.yml配置|
+|:----:|:----:|
+|
+```
+	<!-- SpringDataMongoDB依赖 -->
+	<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring‐boot‐starter‐data‐mongodb</artifactId>
+        </dependency>
+```
+|![yml](https://github.com/panchaopeng/pcp_parent/blob/master/img/common/snowflake.png)|  
+  
+|对比图|
+|:--------:|
+|![对比图](https://github.com/panchaopeng/pcp_parent/blob/master/img/redis/use.png)|  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
