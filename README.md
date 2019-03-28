@@ -61,12 +61,16 @@
 |:---------:|:--------:|:--------:|
 |snowflake（雪花）算法|java版分布式ID生成器每毫秒能生成26万多个id,能使用69年|![snowflake](https://github.com/panchaopeng/pcp_parent/blob/master/img/common/snowflake.png)|
 
-## 2.Spring Data JPA
-> - SpringDataJPA简化了实体类的CRUD操作。
+## 2.Spring Data JPA  
+
+> - SpringDataJPA简化了实体类的CRUD操作。  
+
 |说明|示意图或备注|
 |:-------:|:--------:|
 |接口关系|![Result](https://github.com/panchaopeng/pcp_parent/blob/master/img/jpa/jpa.png)|
 |复杂查询接口|JpaSpecificationExecutor|
 |解析方法名创建查询|一般不好维护，建议用原生sql|
-|原生SQL|![Result](https://github.com/panchaopeng/pcp_parent/blob/master/img/jpa/sql.png)|
+|原生SQL|![Result](https://github.com/panchaopeng/pcp_parent/blob/master/img/jpa/sql.png)|  
+
+
 
