@@ -15,8 +15,6 @@ import org.springframework.data.repository.query.Param;
 public interface LabelDao extends
         JpaRepository<Label,String>,
         JpaSpecificationExecutor<Label> {
-
-
     @Modifying
     @Query("update Label label set label.labelname = :labelName where label.id = :id ")
     void updateName(@Param("labelName") String name,
