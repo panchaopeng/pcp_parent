@@ -67,9 +67,7 @@
 
 > - SpringDataJPA简化了实体类的CRUD操作。   
 
-|依赖|application.yml配置|
-|:----:|:----:|
-|
+### 2-1.SpringDataJPA依赖与配置  
 ```
 	<!-- Spring Data JPA依赖 -->
         <dependency>
@@ -83,8 +81,12 @@
             <version>8.0.14</version>
         </dependency>
 ```
-|![yml](https://github.com/panchaopeng/pcp_parent/blob/master/img/common/snowflake.png)|  
 
+|application.yml配置|
+|:----:|
+|![JPAyml](https://github.com/panchaopeng/pcp_parent/blob/master/img/jpa/yml.png)|  
+
+### 2-2.SpringDataJPA使用  
 
 |说明|示意图或备注|
 |:-------:|:--------:|
@@ -99,9 +101,8 @@
 
 > - RedisTemplate提供了redis各种操作。  
 
-|依赖|application.yml配置|
-|:----:|:----:|
-|
+### 3-1.SpringDataRedis依赖与配置  
+
 ```
 	<!-- SpringDataRedis依赖 -->
     	<dependency>
@@ -110,8 +111,12 @@
 	</dependency>
 	
 ```
-|![yml](https://github.com/panchaopeng/pcp_parent/blob/master/img/common/snowflake.png)|  
 
+|application.yml配置|
+|:----:|
+|![Redisyml](https://github.com/panchaopeng/pcp_parent/blob/master/img/redis/yml.png)|  
+
+### 3-2.SpringDataRedis使用  
 
 |说明|示意图或备注|
 |:-------:|:--------:|
@@ -127,9 +132,12 @@
 > - 介于关系数据库和非关系数据库之间，非关系数据库当中最像关系数据库的产品
 > - 适合 数据量大 写入操作频繁 价值较低 的评论功能场景  
 
-|依赖|application.yml配置|
-|:----:|:----:|
-|
+|对比图|
+|:--------:|
+|![对比图](https://github.com/panchaopeng/pcp_parent/blob/master/img/mongodb/Mongodb.png)|  
+
+### 4-1.SpringDataMongoDB依赖与配置  
+
 ```
 	<!-- SpringDataMongoDB依赖 -->
 	<dependency>
@@ -137,11 +145,20 @@
             <artifactId>spring‐boot‐starter‐data‐mongodb</artifactId>
         </dependency>
 ```
-|![yml](https://github.com/panchaopeng/pcp_parent/blob/master/img/common/snowflake.png)|  
+
+|application.yml配置|
+|:----:|
+|![MongoDByml](https://github.com/panchaopeng/pcp_parent/blob/master/img/mongodb/yml.png)|  
   
-|对比图|
-|:--------:|
-|![对比图](https://github.com/panchaopeng/pcp_parent/blob/master/img/redis/use.png)|  
+### 4-2.SpringDataMongoDB使用  
+
+> - SpringDataMongoDB的使用与SpringDataJPA的使用几乎没有区别  
+
+|区别|示意图|
+|:------:|:------:|
+|MongoDB实体类中id(必须为_id)|![MongoDByml](https://github.com/panchaopeng/pcp_parent/blob/master/img/mongodb/yml.png)|
+|MongoDB的POJO中继承MongoRepository|![MongoDByml](https://github.com/panchaopeng/pcp_parent/blob/master/img/mongodb/yml.png)|
+
 
 
 
