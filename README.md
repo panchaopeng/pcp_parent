@@ -67,9 +67,6 @@
 
 > - SpringDataJPA简化了实体类的CRUD操作。   
 
-|依赖|application.yml配置|
-|:----:|:----:|
-|
 ```
 	<!-- Spring Data JPA依赖 -->
         <dependency>
@@ -83,7 +80,10 @@
             <version>8.0.14</version>
         </dependency>
 ```
-|![yml](https://github.com/panchaopeng/pcp_parent/tree/master/img/jpa/yml.png)|  
+
+|application.yml配置|
+|:----:|
+|![JPAyml](https://github.com/panchaopeng/pcp_parent/blob/master/img/jpa/yml.png)|  
 
 
 |说明|示意图或备注|
@@ -110,7 +110,7 @@
 
 |application.yml配置|
 |:----:|
-|![yml](https://github.com/panchaopeng/pcp_parent/tree/master/img/redis/yml.png)|  
+|![Redisyml](https://github.com/panchaopeng/pcp_parent/blob/master/img/redis/yml.png)|  
 
 
 |说明|示意图或备注|
@@ -137,7 +137,7 @@
 
 |application.yml配置|
 |:----:|
-|![yml](https://github.com/panchaopeng/pcp_parent/tree/master/img/mongodb/yml.png)|  
+|![MongoDByml](https://github.com/panchaopeng/pcp_parent/blob/master/img/mongodb/yml.png)|  
   
 |对比图|
 |:--------:|
