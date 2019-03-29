@@ -380,7 +380,7 @@
 |使用步骤|示意图|
 |:----:|:--------:|
 |1.在涉及Token的微服务的yml加配置)|![yml](https://github.com/panchaopeng/pcp_parent/blob/master/img/jwt/yml.png)|
-|2.Application/Service中注入JwtUtil|![JwtUtil](https://github.com/panchaopeng/pcp_parent/blob/master/img/jwt/matches.png)|
+|2.Application/Service中注入JwtUtil|![JwtUtil](https://github.com/panchaopeng/pcp_parent/blob/master/img/jwt/JwtUtil.png)|
 |3.登录，也即login方法签发Token|![jwt_login](https://github.com/panchaopeng/pcp_parent/blob/master/img/jwt/jwt_login.png)|  
 
 ### 8-3.客户端请求时解析Token
