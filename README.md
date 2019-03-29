@@ -289,6 +289,115 @@
 |消息消费者|![消息消费者](https://github.com/panchaopeng/pcp_parent/blob/master/img/RabbitMQ/topic_con2.png)|
 |消息消费者|![消息消费者](https://github.com/panchaopeng/pcp_parent/blob/master/img/RabbitMQ/topic_con3.png)|  
 
+##
+
+## 7.spring security
+
+> - BCrypt强哈希方法 每次加密的结果都不一样
+> - BCrypt密码加密,BCryptPasswordEncodert强哈希方法来加密密码
+
+### 7-1.spring security依赖与配置
+
+> - 添加了spring security依赖后，所有的地址都被spring security所控制了
+> - 所以要添加一个配置类，配置为所有地址都可以匿名访问
+
+```
+          <!-- 盐加密 -->
+	  <dependency>
+		  <groupId>org.springframework.boot</groupId>
+		  <artifactId>spring-boot-starter-security</artifactId>
+	  </dependency>
+```  
+
+|配置|示意图|
+|:----:|:--------:|
+|application.yml配置|无，可当作密码工具类使用|
+|security安全配置类|[WebSecurityConfig](https://github.com/panchaopeng/pcp_parent/blob/master/pcp_user/src/main/java/com/pcp/user/config/WebSecurityConfig.java)|
+|在Application中,配置bean|![PasswordEncoder](https://github.com/panchaopeng/pcp_parent/blob/master/img/Security/password.png)|  
+
+
+### 7-1.spring security密码加密与校验
+
+|encode加密步骤|示意图|
+|:----:|:--------:|
+|1.Service中注入BCryptPasswordEncoder|![encode](https://github.com/panchaopeng/pcp_parent/blob/master/img/Security/PasswordEncoder.png)|
+|2.调用encode方法|![encode](https://github.com/panchaopeng/pcp_parent/blob/master/img/Security/encode.png)|  
+
+
+|matches解密步骤|示意图|
+|:----:|:--------:|
+|1.DAO中查找该用户信息(加密后的密码)|![encode](https://github.com/panchaopeng/pcp_parent/blob/master/img/Security/findPassword.png)|
+|2.Service中进行密码校验|![encode](https://github.com/panchaopeng/pcp_parent/blob/master/img/Security/matches.png)|
+|3.Controller调用|![login](https://github.com/panchaopeng/pcp_parent/blob/master/img/Security/login.png)|  
+
+
+## 
+
+### 8.JWT的Token认证
+
+> - JSON Web Token（JWT）是一个非常轻巧的规范。这个规范允许我们使用JWT在用户和服务器之间传递安全可靠的信息。
+> - JWT组成：头部（Header）、载荷（playload） 、签证（signature）
+>> - 头部（Header）:描述该JWT的基本信息,例如其类型以及签名所用的算法等
+>>> - 比如：{"type":"JWT","alg":"HS256"},在头部指明了签名算法是HS256算法
+>> - 载荷（playload）:存放有效信息的地方,这些有效信息包含三个部分
+>>> - （1）标准中注册的声明（建议但不强制使用）
+>>>> - iss: jwt签发者 
+>>>> - sub: jwt所面向的用户 
+>>>> - aud: 接收jwt的一方 
+>>>> - exp: jwt的过期时间，这个过期时间必须要大于签发时间 
+>>>> - nbf: 定义在什么时间之前，该jwt都是不可用的. 
+>>>> - iat: jwt的签发时间 
+>>>> - jti: jwt的唯一身份标识，主要用来作为一次性token,从而回避重放攻击。
+>>> - （2）公共的声明
+>>>> - 公共的声明可以添加任何的信息,不建议添加敏感信息，因为该部分在客户端可解密
+>>> - （3）私有的声明
+>>> - 私有声明是提供者和消费者所共同定义的声明.因为base64是对称解密的，意味着该部分信息可以归类为明文信息。
+>>> - 这个指的就是自定义的claim,比如下面的name admin
+>> - 定义一个payload:{"sub":"1234567890","name":"John Doe","admin":true}
+>>> - 签证（signature）:由三部分组成
+>>>> - header (base64后的)
+>>>> - payload (base64后的)
+>>>> - secret :服务端的私钥,jwt的签发和jwt的验证
+
+### 8-1.Java的JJWT实现JWT
+
+> - jjwt的依赖与配置
+> - 在pcp_common公共模块编写工具类[JwtUtil](https://github.com/panchaopeng/pcp_parent/blob/master/pcp_common/src/main/java/util/JwtUtil.java)
+>> - createJWT:Token创建
+>> - parseJWT: Token解析
+
+···
+	<!-- 创建Token -->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.9.1</version>
+        </dependency>
+···
+
+### 8-2.登录时签发Token
+
+|使用步骤|示意图|
+|:----:|:--------:|
+|1.在涉及Token的微服务的yml加配置)|![yml](https://github.com/panchaopeng/pcp_parent/blob/master/img/jwt/yml.png)|
+|2.Application/Service中注入JwtUtil|![JwtUtil](https://github.com/panchaopeng/pcp_parent/blob/master/img/jwt/matches.png)|
+|3.登录，也即login方法签发Token|![jwt_login](https://github.com/panchaopeng/pcp_parent/blob/master/img/jwt/jwt_login.png)|  
+
+### 8-3.客户端请求时解析Token
+
+> - 意味着我们需要拦截请求，并解析请求中携带的Token
+
+|拦截请求|示意图|
+|:----:|:--------:|
+|1.添加jwt拦截器)|[JWTInterceptor](https://github.com/panchaopeng/pcp_parent/blob/master/pcp_user/src/main/java/com/pcp/user/interceptor/JWTInterceptor.java)|
+|2.注册jwt拦截器|[JWTInterceptorConfig](https://github.com/panchaopeng/pcp_parent/blob/master/pcp_user/src/main/java/com/pcp/user/config/JWTInterceptorConfig.java)|
+|3.Service注入HttpServletRequest,拿到Token|![HttpServletRequest](https://github.com/panchaopeng/pcp_parent/blob/master/img/jwt/HttpServletRequest.png)|
+|4.Service注入JwtUtil,解析Token信息|![parse](https://github.com/panchaopeng/pcp_parent/blob/master/img/jwt/parse.png)|
+
+
+
+
+
 
 
 
