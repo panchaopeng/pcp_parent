@@ -380,7 +380,7 @@
 |使用步骤|示意图|
 |:----:|:--------:|
 |1.在涉及Token的微服务的yml加配置)|![yml](https://github.com/panchaopeng/pcp_parent/blob/master/img/jwt/yml.png)|
-|2.Application/Service中注入JwtUtil|![JwtUtil](https://github.com/panchaopeng/pcp_parent/blob/master/img/jwt/matches.png)|
+|2.Application/Service中注入JwtUtil|![JwtUtil](https://github.com/panchaopeng/pcp_parent/blob/master/img/jwt/JwtUtil.png)|
 |3.登录，也即login方法签发Token|![jwt_login](https://github.com/panchaopeng/pcp_parent/blob/master/img/jwt/jwt_login.png)|  
 
 ### 8-3.客户端请求时解析Token
@@ -392,7 +392,112 @@
 |1.添加jwt拦截器)|[JWTInterceptor](https://github.com/panchaopeng/pcp_parent/blob/master/pcp_user/src/main/java/com/pcp/user/interceptor/JWTInterceptor.java)|
 |2.注册jwt拦截器|[JWTInterceptorConfig](https://github.com/panchaopeng/pcp_parent/blob/master/pcp_user/src/main/java/com/pcp/user/config/JWTInterceptorConfig.java)|
 |3.Service注入HttpServletRequest,拿到Token|![HttpServletRequest](https://github.com/panchaopeng/pcp_parent/blob/master/img/jwt/HttpServletRequest.png)|
-|4.Service注入JwtUtil,解析Token信息|![parse](https://github.com/panchaopeng/pcp_parent/blob/master/img/jwt/parse.png)|
+|4.Service注入JwtUtil,解析Token信息|![parse](https://github.com/panchaopeng/pcp_parent/blob/master/img/jwt/parse.png)|  
+
+##
+
+## 9.Spring Cloud
+
+```
+<!-- 父工程中引入Spring Cloud -->
+<!-- dependencyManagement 表示锁定该版本。与Spring boot2.x对应 -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Greenwich.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+```
+
+
+> - Spring Boot专注于快速、方便集成的单个微服务个体
+> - Spring Cloud关注全局的服务治理框架
+
+### 9-1.Eureka(服务发现组件 )
+
+> - Eureka包含两个组件：Eureka Server和Eureka Client
+>> - Eureka Server提供服务注册服务
+>> - Eureka Client是一个java客户端，用于简化与Eureka Server的交互
+
+#### 9-1-1.Eureka Server
+
+```
+    <!-- Eureka服务器。提供服务注册 -->
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+        </dependency>
+    </dependencies>
+```
+|说明|示意图|
+|:----:|:----:|
+|yml配置|![yml](https://github.com/panchaopeng/pcp_parent/blob/master/img/eureka/yml.png)|
+|启动类配置|![EnableEurekaServer](https://github.com/panchaopeng/pcp_parent/blob/master/img/eureka/EnableEurekaServer.png)|  
+
+#### 9-1-2.Eureka Client
+
+```
+          <!-- Eureka客户端 -->
+	  <dependency>
+		  <groupId>org.springframework.cloud</groupId>
+		  <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+	  </dependency>
+```
+
+|说明|示意图|
+|:----:|:----:|
+|yml配置|![yml](https://github.com/panchaopeng/pcp_parent/blob/master/img/eureka/yml_client.png)|
+|启动类配置|![EnableEurekaServer](https://github.com/panchaopeng/pcp_parent/blob/master/img/eureka/EnableEurekaClient.png)|  
+
+
+### 9-2.Feign(实现服务间的调用 )
+
+> - 为什么需要Feign?因为服务间通常需要交互，而每个微服务的端口号又都不一致，因此需要Feign通过yml的application name进行调用
+
+```
+	<!-- feign,模块间的调用，也即服务调用 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+```
+
+> - @FeignClient注解用于指定从哪个服务中调用功能,不能包含下划线
+> -  @PathVariable注解一定要指定参数名称，否则出错
+
+|说明|示意图|
+|:----:|:----:|
+|yml配置|无|
+|启动类配置|![feign](https://github.com/panchaopeng/pcp_parent/blob/master/img/eureka/feign.png)|
+|client包下写接口(该接口必须与某个微服务的Controller方法一致)|![client](https://github.com/panchaopeng/pcp_parent/blob/master/img/eureka/client.png)|
+|Controller中注入client并调用接口方法|![baseClient](https://github.com/panchaopeng/pcp_parent/blob/master/img/eureka/baseClient.png)|  
+
+
+### 9-3.熔断器Hystrix
+
+> - 基础服务的故障可能会导致**级联故障**，进而造成整个系统不可用的情况，这种现象被称为服务雪崩效应
+> - Hystrix 能使你的系统在出现**依赖服务失效**的时候，通过**隔离系统所依赖的服务**，防止服务级联失败，同时提供失败回退机制
+
+|说明|示意图|
+|:----:|:----:|
+|yml配置|![Hystrix](https://github.com/panchaopeng/pcp_parent/blob/master/img/eureka/yml_hystrix.png)|
+|client下新建impl,创建熔断实现类|![impl](https://github.com/panchaopeng/pcp_parent/blob/master/img/eureka/Hystrix.png)|
+|修改xClient的@FeignClient注解，添加fallback|![fallback](https://github.com/panchaopeng/pcp_parent/blob/master/img/eureka/fallback.png)|   
+
+
+
+
+
+
+
+
+
 
 
 
