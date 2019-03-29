@@ -389,7 +389,7 @@
 
 |拦截请求|示意图|
 |:----:|:--------:|
-|1.添加jwt拦截器)|[JWTInterceptor](https://github.com/panchaopeng/pcp_parent/blob/master/pcp_user/src/main/java/com/pcp/user/interceptor/JWTInterceptor.java)|
+|1.添加jwt拦截器)|[JWTInterceptor(仅供参考)](https://github.com/panchaopeng/pcp_parent/blob/master/pcp_user/src/main/java/com/pcp/user/interceptor/JWTInterceptor.java)|
 |2.注册jwt拦截器|[JWTInterceptorConfig](https://github.com/panchaopeng/pcp_parent/blob/master/pcp_user/src/main/java/com/pcp/user/config/JWTInterceptorConfig.java)|
 |3.Service注入HttpServletRequest,拿到Token|![HttpServletRequest](https://github.com/panchaopeng/pcp_parent/blob/master/img/jwt/HttpServletRequest.png)|
 |4.Service注入JwtUtil,解析Token信息|![parse](https://github.com/panchaopeng/pcp_parent/blob/master/img/jwt/parse.png)|  
@@ -479,7 +479,7 @@
 |Controller中注入client并调用接口方法|![baseClient](https://github.com/panchaopeng/pcp_parent/blob/master/img/eureka/baseClient.png)|  
 
 
-### 9-3.熔断器Hystrix
+### 9-3.Hystrix(熔断器)
 
 > - 基础服务的故障可能会导致**级联故障**，进而造成整个系统不可用的情况，这种现象被称为服务雪崩效应
 > - Hystrix 能使你的系统在出现**依赖服务失效**的时候，通过**隔离系统所依赖的服务**，防止服务级联失败，同时提供失败回退机制
@@ -490,14 +490,45 @@
 |client下新建impl,创建熔断实现类|![impl](https://github.com/panchaopeng/pcp_parent/blob/master/img/eureka/Hystrix.png)|
 |修改xClient的@FeignClient注解，添加fallback|![fallback](https://github.com/panchaopeng/pcp_parent/blob/master/img/eureka/fallback.png)|   
 
+##
 
+## 10.Zuul(微服务网关)
 
+> - 微服务网关是介于客户端和服务器端之间的中间层，所有的外部请求都会先经过微服务网关
+> - Zuul组件的核心是一系列的过滤器
+> - 为什么需要微服务网关？
+>> - 不同的微服务一般有不同的网络地址，客户端可能需要调用多个服务的接口才能完成一个业务需求...
 
+### 10-1.微服务网关
 
+> - 后台微服务网关，对应**后台ZuulFilter过滤器：ManagerFilter**,主要是判断管理员角色，然后
+> - 前台微服务网关，对应**前台ZuulFilter过滤器：WebFilter**，主要是判断携带的
 
+```
+ 	<!-- Eureka客户端 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+        <!-- zuul 网关 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-zuul</artifactId>
+        </dependency>
+	<!-- 通过zuul调用eureka注册的服务（可能不用这个，也可能需要） -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-eureka</artifactId>
+            <version>1.4.6.RELEASE</version>
+        </dependency>
+```
 
-
-
+|说明|示意图|
+|:----:|:----:|
+|yml配置|![man_yml](https://github.com/panchaopeng/pcp_parent/blob/master/img/zuul/man_yml.png)|
+|启动类配置|![man_application](https://github.com/panchaopeng/pcp_parent/blob/master/img/zuul/man_application.png)|
+|后台ZuulFilter过滤器：ManagerFilter|[ManagerFilter(仅供参考)](https://github.com/panchaopeng/pcp_parent/blob/master/pcp_manager/src/main/java/com/pcp/manager/filter/ManagerFilter.java)|
+|前台ZuulFilter过滤器：WebFilter|[WebFilter(仅供参考)](https://github.com/panchaopeng/pcp_parent/blob/master/pcp_web/src/main/java/com/pcp/web/filter/WebFilter.java)|  
 
 
 
