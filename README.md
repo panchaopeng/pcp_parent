@@ -38,7 +38,7 @@
 > - [8-2.登录时签发Token](#8-2登录时签发Token)
 > - [8-3.客户端请求时解析Token](#8-3客户端请求时解析Token)
 - [9.Spring Cloud系列](#9Spring-Cloud系列)
-> - [9-1.Eureka(服务发现组件)](#9-1Eureka(服务发现组件))
+> - [9-1.Eureka服务发现组件](#9-1Eureka服务发现组件)
 >> - [9-1-1.Eureka Server](#9-1-1Eureka-Server)
 >> - [9-1-2.Eureka Client](#9-1-2Eureka-Client)
 > - [9-2.Feign实现服务间的调用](#9-2Feign实现服务间的调用)
@@ -478,7 +478,7 @@
 > - Spring Boot专注于快速、方便集成的单个微服务个体
 > - Spring Cloud关注全局的服务治理框架
 
-### 9-1.Eureka(服务发现组件)
+### 9-1.Eureka服务发现组件
 
 > - Eureka包含两个组件：Eureka Server和Eureka Client
 >> - Eureka Server提供服务注册服务
