@@ -6,8 +6,62 @@
 
 ##
 
+
 # 目录
 - [0.准备后台开发文档](#0.准备后台开发文档)
+- [1.关于后台公共模块](#1.关于后台公共模块)
+-- [1-1.全局的返回结果实体类](#1-1.全局的返回结果实体类)
+-- [1-2.全部模块采用SpringMVC模式](#1-2.全部模块采用SpringMVC模式)
+-- [1-3.基于twitter的snowflake（雪花）算法-分布式ID生成器](1-3.基于twitter的snowflake（雪花）算法-分布式ID生成器)
+- [2.Spring Data JPA](#2.Spring-Data-JPA)
+-- [2-1.SpringDataJPA依赖与配置](#2-1.SpringDataJPA依赖与配置)
+-- [2-2.SpringDataJPA使用](#2-2.SpringDataJPA使用)
+- [3.Spring Data Redis](#3.Spring-Data-Redis)
+-- [3-1.SpringDataRedis依赖与配置](#3-1.SpringDataRedis依赖与配置)
+-- [3-2.SpringDataRedis使用](#3-2.SpringDataRedis使用)
+- [4.SpringDataMongoDB](#4.SpringDataMongoDB)
+-- [4-1.SpringDataMongoDB依赖与配置](#4-1.SpringDataMongoDB依赖与配置)
+-- [4-2.SpringDataMongoDB使用](#4-2.SpringDataMongoDB使用)
+- [5.SpringDataElasticsearch](#5.SpringDataElasticsearch)
+-- [5-1.SpringDataElasticsearch依赖与配置](#5-1.SpringDataElasticsearch依赖与配置)
+-- [5-2.SpringDataElasticsearch使用](#5-2.SpringDataElasticsearch使用)
+-- [5-3.SpringDataElasticsearch搜索例子](#5-3.SpringDataElasticsearch搜索例子)
+- [6.RabbitMQ](#6.RabbitMQ)
+-- [6-1.RabbitMQ依赖与配置](#6-1.RabbitMQ依赖与配置)
+-- [6-2.RabbitMQ-直接模式(Direct)](#6-2.RabbitMQ-直接模式(Direct))
+-- [6-3.RabbitMQ-分列模式(Fanout)](#6-3.RabbitMQ-分列模式(Fanout))
+-- [6-4.RabbitMQ-主题模式(Topic)](#6-4.RabbitMQ-主题模式(Topic))
+- [7.spring security](#7.spring-security)
+-- [7-1.spring security依赖与配置](#7-1.spring-security依赖与配置)
+- [8.JWT的Token认证](#8.JWT的Token认证)
+-- [8-1.Java的JJWT实现JWT](#8-1.Java的JJWT实现JWT)
+-- [8-2.登录时签发Token](#8-2.登录时签发Token)
+-- [8-3.客户端请求时解析Token](#8-3.客户端请求时解析Token)
+- [9.Spring Cloud系列](#9.Spring-Cloud系列)
+-- [9-1.Eureka(服务发现组件)](#9-1.Eureka(服务发现组件))
+--- [9-1-1.Eureka Server](#9-1-1.Eureka-Server)
+--- [9-1-2.Eureka Client](#9-1-2.Eureka-Client)
+-- [9-2.Feign(实现服务间的调用)](#9-2.Feign(实现服务间的调用))
+-- [9-3.Hystrix(熔断器)](#9-3.Hystrix(熔断器))
+-- [9-4.Zuul(微服务网关)](9-4.Zuul(微服务网关))
+--- [9-4-1.前后台微服务网关](#9-4-1.前后台微服务网关)
+-- [9-5.SpringCloudConfig(分布式配置中心)与SpringCloudBus(消息总线组件)](#9-5.SpringCloudConfig(分布式配置中心)与SpringCloudBus(消息总线组件))
+--- [9-5-1.config server依赖与配置](#9-5-1.config-server依赖与配置)
+--- [9-5-2.config client依赖与配置](#9-5-2.config-client依赖与配置)
+--- [9-5-3.自定义配置的读取](#9-5-3.自定义配置的读取)
+- [10.Docker私有仓库搭建与配置](#10.Docker私有仓库搭建与配置)
+- [11.如何将微服务自动部署并打包成镜像？](#11.如何将微服务自动部署并打包成镜像？)
+- [12.持续集成](#12.持续集成)
+-- [12-1.Gogs安装与配置](#12-1.Gogs安装与配置)
+-- [12-2.Jenkins(实现持续集成)](#12-2.Jenkins(实现持续集成))
+- [13.容器管理与容器监控](#13.容器管理与容器监控)
+-- [13-1.Rancher(容器管理工具)](#13-1.Rancher(容器管理工具))
+-- [13-2.微服务扩容与缩容](#13-2.微服务扩容与缩容)
+-- [13-3.influxDB(分布式时间序列数据库)](#13-3.influxDB(分布式时间序列数据库))
+-- [13-4.cAdvisor(监控Docker容器)](#13-4.cAdvisor(监控Docker容器))
+-- [13-5.Grafana(可视化面板,查看容器参数)](#13-5.Grafana(可视化面板,查看容器参数))
+-- [13-6.预警通知设置](#13-6.预警通知设置)
+
 
 
 
@@ -68,11 +122,11 @@
 
 ##
 
-## 2.Spring Data JPA  
+## 2.Spring Data JPA
 
 > - SpringDataJPA简化了实体类的CRUD操作。   
 
-### 2-1.SpringDataJPA依赖与配置  
+### 2-1.SpringDataJPA依赖与配置
 ```
 	<!-- Spring Data JPA依赖 -->
         <dependency>
@@ -91,7 +145,7 @@
 |:----:|
 |![JPAyml](https://github.com/panchaopeng/pcp_parent/blob/master/img/jpa/yml.png)|  
 
-### 2-2.SpringDataJPA使用  
+### 2-2.SpringDataJPA使用
 
 |说明|示意图或备注|
 |:-------:|:--------:|
@@ -102,11 +156,11 @@
 
 ##
 
-## 3.Spring Data Redis  
+## 3.Spring Data Redis
 
 > - RedisTemplate提供了redis各种操作。  
 
-### 3-1.SpringDataRedis依赖与配置  
+### 3-1.SpringDataRedis依赖与配置
 
 ```
 	<!-- SpringDataRedis依赖 -->
@@ -121,7 +175,7 @@
 |:----:|
 |![Redisyml](https://github.com/panchaopeng/pcp_parent/blob/master/img/redis/yml.png)|  
 
-### 3-2.SpringDataRedis使用  
+### 3-2.SpringDataRedis使用
 
 |说明|示意图或备注|
 |:-------:|:--------:|
@@ -132,7 +186,7 @@
 
 ##  
 
-## 4.SpringDataMongoDB  
+## 4.SpringDataMongoDB
 > - 操作MongoDB的持久层框架，封装了底层的mongodb-driver
 > - 介于关系数据库和非关系数据库之间，非关系数据库当中最像关系数据库的产品
 > - 适合 数据量大 写入操作频繁 价值较低 的评论功能场景  
@@ -141,7 +195,7 @@
 |:--------:|
 |![对比图](https://github.com/panchaopeng/pcp_parent/blob/master/img/mongodb/Mongodb.png)|  
 
-### 4-1.SpringDataMongoDB依赖与配置  
+### 4-1.SpringDataMongoDB依赖与配置
 
 ```
 	<!-- SpringDataMongoDB依赖 -->
@@ -155,7 +209,7 @@
 |:----:|
 |![MongoDByml](https://github.com/panchaopeng/pcp_parent/blob/master/img/mongodb/yml.png)|  
   
-### 4-2.SpringDataMongoDB使用  
+### 4-2.SpringDataMongoDB使用
 
 > - SpringDataMongoDB的*CRUD*使用与SpringDataJPA的*CRUD*使用几乎没有区别  
 
@@ -167,7 +221,7 @@
 
 ##
 
-## 5.SpringDataElasticsearch  
+## 5.SpringDataElasticsearch
 
 > - 具体配置查看[2.配置容器.docx](https://github.com/panchaopeng/pcp_parent/tree/master/doc笔记/2.配置容器.docx)中的Elasticsearch内容
 > - 实时的分布式搜索和分析引擎
@@ -194,7 +248,7 @@
 |:----:|
 |![Elasticsearchyml](https://github.com/panchaopeng/pcp_parent/blob/master/img/elasticsearch/yml.png)|  
   
-### 5-2.SpringDataElasticsearch使用  
+### 5-2.SpringDataElasticsearch使用
 
 > - SpringDataElasticsearch的*CRUD*使用与SpringDataJPA的*CRUD*使用几乎没有区别  
 
@@ -401,7 +455,7 @@
 
 ##
 
-## 9.Spring Cloud
+## 9.Spring Cloud系列
 
 ```
 <!-- 父工程中引入Spring Cloud -->
@@ -423,7 +477,7 @@
 > - Spring Boot专注于快速、方便集成的单个微服务个体
 > - Spring Cloud关注全局的服务治理框架
 
-### 9-1.Eureka(服务发现组件 )
+### 9-1.Eureka(服务发现组件)
 
 > - Eureka包含两个组件：Eureka Server和Eureka Client
 >> - Eureka Server提供服务注册服务
@@ -461,7 +515,7 @@
 |启动类配置|![EnableEurekaServer](https://github.com/panchaopeng/pcp_parent/blob/master/img/eureka/EnableEurekaClient.png)|  
 
 
-### 9-2.Feign(实现服务间的调用 )
+### 9-2.Feign(实现服务间的调用)
 
 > - 为什么需要Feign?因为服务间通常需要交互，而每个微服务的端口号又都不一致，因此需要Feign通过yml的application name进行调用
 
@@ -497,7 +551,7 @@
 
 ##
 
-## 10.Zuul(微服务网关)
+## 9-4.Zuul(微服务网关)
 
 > - 微服务网关是介于客户端和服务器端之间的中间层，所有的外部请求都会先经过微服务网关
 > - Zuul组件的核心是一系列的过滤器
@@ -505,7 +559,7 @@
 >> - 不同的微服务一般有不同的网络地址，客户端可能需要调用多个服务的接口才能完成一个业务需求...
 >> - 身份认证和安全: 识别每一个资源的验证要求，并拒绝那些不符的请求
 
-### 10-1.微服务网关
+### 9-4-1.前后台微服务网关
 
 > - 后台微服务网关，对应**后台ZuulFilter过滤器：ManagerFilter**,主要是判断管理员角色，然后
 > - 前台微服务网关，对应**前台ZuulFilter过滤器：WebFilter**，主要是判断携带的
@@ -538,7 +592,7 @@
 
 ## 
 
-## 11.SpringCloudConfig(分布式配置中心)与SpringCloudBus(消息总线组件)
+## 9-5.SpringCloudConfig(分布式配置中心)与SpringCloudBus(消息总线组件)
 
 > - SpringCloudBus，不重启微服务的情况下更新配置(拉取码云上SpringCloudConfig的yml文件)
 > - 使用Git仓库存放yml配置文件(比如[**码云**](https://gitee.com/))
@@ -546,7 +600,7 @@
 >> - config server:默认使用Git存储配置文件内容，也可以使用SVN存储，或者是本地文件存储
 >> - config client:微服务在启动时会请求Config Server获取配置文件的内容，请求到后再启动容器
 
-### 11-1.config server依赖与配置
+### 9-5-1.config server依赖与配置
 
 > - 1.注册码云，并创建项目
 > - 2.将所有微服务的yml文件上传到码云仓库,并赋值git地址备用
@@ -579,7 +633,7 @@
 |SpringCloudBus追加在码云的yml配置|![bus](https://github.com/panchaopeng/pcp_parent/blob/master/img/config/bus.png)|  
 
 
-### 11-2.config client依赖与配置
+### 9-5-2.config client依赖与配置
 
 ```
 	<!-- config client依赖 -->
@@ -609,7 +663,7 @@
 |SpringCloudBus追加在码云的yml配置：rabbitMQ|![rabbitMQ](https://github.com/panchaopeng/pcp_parent/blob/master/img/config/rabbitMQ.png)|  
 
 
-### 11-3.自定义配置的读取
+### 9-5-3.自定义配置的读取
 
 > - config配置了bus后，读取yml的配置还需要加注解@RefreshScope，此注解用于刷新配置
 
@@ -621,7 +675,7 @@
 ##
 
 
-## 12.Docker私有仓库搭建与配置
+## 10.Docker私有仓库搭建与配置
 
 
 |说明|备注|
@@ -635,7 +689,7 @@
 
 ##
 
-## 13.如何将微服务自动部署并打包成镜像？
+## 11.如何将微服务自动部署并打包成镜像？
 
 > - 利用DockerMaven插件生成镜像并上传镜像到Docker私有仓库
 
@@ -691,11 +745,11 @@
 
 ##
 
-## 14.持续集成
+## 12.持续集成
 
 > - 自动化的周期性的集成测试过程
 
-### 14-1.Gogs安装与配置
+### 12-1.Gogs安装与配置
 
 > - 搭建自助 Git 服务
 > - 目的是将idea代码上传到Gogs git
@@ -707,7 +761,7 @@
 |浏览|http://ip:3000|  
 
 
-### 14-2.Jenkins(实现持续集成)
+### 12-2.Jenkins(实现持续集成)
 
 > - 以图形化界面连接Gogs的git代码，并将某个微服务生成镜像并上传到docker私有仓库
 > - 必须保证系统有jdk
@@ -732,7 +786,7 @@
 
 ## 
 
-## 15.容器管理与容器监控
+## 13.容器管理与容器监控
 
 > - 14节我们已经在图形化界面生成了镜像，同理，我们也可以在图形化界面启动容器并管理
 > - Rancher:管理容器的start/stop/delete
@@ -741,7 +795,7 @@
 > - Grafana：以图形化方式查看容器数据
 
 
-### 15-1.Rancher(容器管理工具)
+### 13-1.Rancher(容器管理工具)
 
 > - 容器部署及管理平台,一键式应用部署和管理
 
@@ -756,7 +810,7 @@
 |选择创建的环境-添加应用|也即以图形化的界面配置镜像并启动容器了|  
 
 
-### 15-2.微服务扩容与缩容
+### 13-2.微服务扩容与缩容
 
 |说明|备注|
 |:-----:|:------:|
@@ -765,7 +819,7 @@
 |3.复制触发地址，备用||  
 
 
-### 15-3.influxDB(分布式时间序列数据库)
+### 13-3.influxDB(分布式时间序列数据库)
 
 > - 存储cAdvisor组件所提供的监控信息
 
@@ -784,7 +838,7 @@
 |4.查看采集的数据|切换到cadvisor数据库,SHOW MEASUREMENTS.由于没有安装cAdvisor，所以看不到数据|  
 
 
-### 15-4.cAdvisor(监控Docker容器)
+### 13-4.cAdvisor(监控Docker容器)
 
 > - 采集Docker容器的数据，尤其是使用内存
 
@@ -796,7 +850,7 @@
 |访问|http://ip:8080/containers/|  
 
 
-### 15-5.Grafana(可视化面板,查看容器参数)
+### 13-5.Grafana(可视化面板,查看容器参数)
 
 > - 以图形化的方式查看cAdvisor采集到的容器数据
 
@@ -811,7 +865,7 @@
 |2.添加仪表盘，Manage-Dashboadr-Add-Graph-Panel Title-Edit,查询内存，选择容器名称，保存|![general](https://github.com/panchaopeng/pcp_parent/blob/master/img/graph/general.png)![metrics](https://github.com/panchaopeng/pcp_parent/blob/master/img/graph/metrics.png)|  
 
 
-### 15-6.预警通知设置
+### 13-6.预警通知设置
 |说明|备注|
 |:-----:|:------:|
 |1.alerting-Notification channels-Add channel|![notification](https://github.com/panchaopeng/pcp_parent/blob/master/img/graph/notification.png)|
