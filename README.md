@@ -498,6 +498,7 @@
 > - Zuul组件的核心是一系列的过滤器
 > - 为什么需要微服务网关？
 >> - 不同的微服务一般有不同的网络地址，客户端可能需要调用多个服务的接口才能完成一个业务需求...
+>> - 身份认证和安全: 识别每一个资源的验证要求，并拒绝那些不符的请求
 
 ### 10-1.微服务网关
 
@@ -530,19 +531,89 @@
 |后台ZuulFilter过滤器：ManagerFilter|[ManagerFilter(仅供参考)](https://github.com/panchaopeng/pcp_parent/blob/master/pcp_manager/src/main/java/com/pcp/manager/filter/ManagerFilter.java)|
 |前台ZuulFilter过滤器：WebFilter|[WebFilter(仅供参考)](https://github.com/panchaopeng/pcp_parent/blob/master/pcp_web/src/main/java/com/pcp/web/filter/WebFilter.java)|  
 
+## 
+
+## 11.SpringCloudConfig(分布式配置中心)与SpringCloudBus(消息总线组件)
+
+> - SpringCloudBus，不重启微服务的情况下更新配置(拉取码云上SpringCloudConfig的yml文件)
+> - 使用Git仓库存放yml配置文件(比如[**码云**](https://gitee.com/))
+> - 两个角色：
+>> - config server:默认使用Git存储配置文件内容，也可以使用SVN存储，或者是本地文件存储
+>> - config client:微服务在启动时会请求Config Server获取配置文件的内容，请求到后再启动容器
+
+### 11-1.config server依赖与配置
+
+> - 1.注册码云，并创建项目
+> - 2.将所有微服务的yml文件上传到码云仓库,并赋值git地址备用
+> - 3.所有的yml文件有一套命名规则，必须遵循：
+>> - {application}-{profile}.yml或{application}-{profile}.properties
+>> - application为应用名称 profile指的开发环境（用于区分开发环境，测试环境、生产环境等）
+
+```
+	<!-- config server依赖 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring‐cloud‐config‐server</artifactId>
+        </dependency>
+	
+	<!-- SpringCloudBus的server依赖，自动更新配置文件 -->
+	<dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring‐cloud‐bus</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring‐cloud‐stream‐binder‐rabbit</artifactId>
+        </dependency>
+```
+
+|说明|示意图|
+|:-----:|:------:|
+|配置启动类|![Application](https://github.com/panchaopeng/pcp_parent/blob/master/img/config/Application.png)|
+|码云上的yml配置|![yml](https://github.com/panchaopeng/pcp_parent/blob/master/img/config/yml.png)|
+|SpringCloudBus追加在码云的yml配置|![bus](https://github.com/panchaopeng/pcp_parent/blob/master/img/config/bus.png)|  
 
 
+### 11-2.config client依赖与配置
+
+```
+	<!-- config client依赖 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring‐cloud‐starter‐config</artifactId>
+        </dependency>
+	
+	<!-- SpringCloudBus的client依赖 -->
+	<dependency>
+          <groupId>org.springframework.cloud</groupId>
+          <artifactId>spring‐cloud‐bus</artifactId>
+      </dependency>
+      <dependency>
+          <groupId>org.springframework.cloud</groupId>
+          <artifactId>spring‐cloud‐stream‐binder‐rabbit</artifactId>
+      </dependency>
+      <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring‐boot‐starter‐actuator</artifactId>
+      </dependency>
+```
+
+|说明|示意图|
+|:-----:|:------:|
+|码云上yml配置|![yml](https://github.com/panchaopeng/pcp_parent/blob/master/img/config/client.png)|
+|SpringCloudBus追加在码云的yml配置：rabbitMQ|![rabbitMQ](https://github.com/panchaopeng/pcp_parent/blob/master/img/config/rabbitMQ.png)|  
 
 
+### 11-3.自定义配置的读取
+
+> - config配置了bus后，读取yml的配置还需要加注解@RefreshScope，此注解用于刷新配置
+
+|@RefreshScope,刷新配置|
+|:---------:|
+|![RefreshScope](https://github.com/panchaopeng/pcp_parent/blob/master/img/config/RefreshScope.png)|  
 
 
-
-
-
-
-
-
-
+##
 
 
 
