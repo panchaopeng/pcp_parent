@@ -43,7 +43,7 @@
 >> - [9-1-2.Eureka Client](#9-1-2Eureka-Client)
 > - [9-2.Feign实现服务间的调用](#9-2Feign实现服务间的调用)
 > - [9-3.Hystrix熔断器](#9-3Hystrix熔断器)
-> - [9-4.Zuul微服务网关](9-4Zuul微服务网关)
+> - [9-4.Zuul微服务网关](#9-4Zuul微服务网关)
 >> - [9-4-1.前后台微服务网关](#9-4-1前后台微服务网关)
 > - [9-5.SpringCloudConfig分布式配置中心与SpringCloudBus消息总线组件](#9-5SpringCloudConfig分布式配置中心与SpringCloudBus消息总线组件)
 >> - [9-5-1.config server依赖与配置](#9-5-1config-server依赖与配置)
