@@ -12,7 +12,7 @@
 - [1.关于后台公共模块](#1关于后台公共模块)
 > - [1-1.全局的返回结果实体类](#1-1全局的返回结果实体类)
 > - [1-2.全部模块采用SpringMVC模式](#1-2全部模块采用SpringMVC模式)
-> - [1-3.基于twitter的snowflake雪花算法-分布式ID生成器](1-3基于twitter的snowflake雪花算法-分布式ID生成器)
+> - [1-3.基于twitter的snowflake雪花算法 分布式ID生成器](1-3基于twitter的snowflake雪花算法-分布式ID生成器)
 - [2.Spring Data JPA](#2Spring-Data-JPA)
 > - [2-1.SpringDataJPA依赖与配置](#2-1SpringDataJPA依赖与配置)
 > - [2-2.SpringDataJPA使用](#2-2SpringDataJPA使用)
@@ -102,7 +102,7 @@
 |xxxPoJo|某实体类| ![Result](https://github.com/panchaopeng/pcp_parent/blob/master/img/common/1.common.pojo.png)|
 |BaseExceptionHandler|模块的统一异常处理|![BaseExceptionHandler](https://github.com/panchaopeng/pcp_parent/blob/master/img/common/1.common.exception.png)|  
 
-### 1-3.基于twitter的snowflake雪花算法-分布式ID生成器
+### 1-3.基于twitter的snowflake雪花算法 分布式ID生成器
 
 > - 为什么要使用**分布式ID生成器**？为什么不使用数据库的本身的自增ID？
 >> - 因为微服务大多数都触及分布式开发，需要确保整个分布式系统内不产生重复的ID
