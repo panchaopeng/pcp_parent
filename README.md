@@ -12,7 +12,7 @@
 - [1.关于后台公共模块](#1关于后台公共模块)
 > - [1-1.全局的返回结果实体类](#1-1全局的返回结果实体类)
 > - [1-2.全部模块采用SpringMVC模式](#1-2全部模块采用SpringMVC模式)
-> - [1-3.基于twitter的snowflake（雪花）算法-分布式ID生成器](1-3基于twitter的snowflake（雪花）算法-分布式ID生成器)
+> - [1-3.基于twitter的snowflake雪花算法-分布式ID生成器](1-3基于twitter的snowflake雪花算法-分布式ID生成器)
 - [2.Spring Data JPA](#2Spring-Data-JPA)
 > - [2-1.SpringDataJPA依赖与配置](#2-1SpringDataJPA依赖与配置)
 > - [2-2.SpringDataJPA使用](#2-2SpringDataJPA使用)
@@ -28,9 +28,9 @@
 > - [5-3.SpringDataElasticsearch搜索例子](#5-3SpringDataElasticsearch搜索例子)
 - [6.RabbitMQ](#6RabbitMQ)
 > - [6-1.RabbitMQ依赖与配置](#6-1RabbitMQ依赖与配置)
-> - [6-2.RabbitMQ-直接模式(Direct)](#6-2RabbitMQ-直接模式(Direct))
-> - [6-3.RabbitMQ-分列模式(Fanout)](#6-3RabbitMQ-分列模式(Fanout))
-> - [6-4.RabbitMQ-主题模式(Topic)](#6-4RabbitMQ-主题模式(Topic))
+> - [6-2.RabbitMQ-直接模式Direct](#6-2RabbitMQ-直接模式Direct)
+> - [6-3.RabbitMQ-分列模式Fanout](#6-3RabbitMQ-分列模式Fanout)
+> - [6-4.RabbitMQ-主题模式Topic](#6-4RabbitMQ-主题模式Topic)
 - [7.spring security](#7spring-security)
 > - [7-1.spring security依赖与配置](#7-1spring-security依赖与配置)
 - [8.JWT的Token认证](#8JWT的Token认证)
@@ -41,25 +41,25 @@
 > - [9-1.Eureka(服务发现组件)](#9-1Eureka(服务发现组件))
 >> - [9-1-1.Eureka Server](#9-1-1Eureka-Server)
 >> - [9-1-2.Eureka Client](#9-1-2Eureka-Client)
-> - [9-2.Feign(实现服务间的调用)](#9-2Feign(实现服务间的调用))
-> - [9-3.Hystrix(熔断器)](#9-3Hystrix(熔断器))
-> - [9-4.Zuul(微服务网关)](9-4Zuul(微服务网关))
+> - [9-2.Feign实现服务间的调用](#9-2Feign实现服务间的调用)
+> - [9-3.Hystrix熔断器](#9-3Hystrix熔断器)
+> - [9-4.Zuul微服务网关](9-4Zuul微服务网关)
 >> - [9-4-1.前后台微服务网关](#9-4-1前后台微服务网关)
-> - [9-5.SpringCloudConfig(分布式配置中心)与SpringCloudBus(消息总线组件)](#9-5SpringCloudConfig(分布式配置中心)与SpringCloudBus(消息总线组件))
+> - [9-5.SpringCloudConfig分布式配置中心与SpringCloudBus消息总线组件](#9-5SpringCloudConfig分布式配置中心与SpringCloudBus消息总线组件)
 >> - [9-5-1.config server依赖与配置](#9-5-1config-server依赖与配置)
 >> - [9-5-2.config client依赖与配置](#9-5-2config-client依赖与配置)
 >> - [9-5-3.自定义配置的读取](#9-5-3自定义配置的读取)
 - [10.Docker私有仓库搭建与配置](#10Docker私有仓库搭建与配置)
-- [11.如何将微服务自动部署并打包成镜像？](#11如何将微服务自动部署并打包成镜像？)
+- [11.如何将微服务自动部署并打包成镜像](#11如何将微服务自动部署并打包成镜像)
 - [12.持续集成](#12持续集成)
 > - [12-1.Gogs安装与配置](#12-1Gogs安装与配置)
-> - [12-2.Jenkins(实现持续集成)](#12-2Jenkins(实现持续集成))
+> - [12-2.Jenkins实现持续集成](#12-2Jenkins实现持续集成)
 - [13.容器管理与容器监控](#13容器管理与容器监控)
-> - [13-1.Rancher(容器管理工具)](#13-1Rancher(容器管理工具))
+> - [13-1.Rancher容器管理工具](#13-1Rancher容器管理工具)
 > - [13-2.微服务扩容与缩容](#13-2微服务扩容与缩容)
-> - [13-3.influxDB(分布式时间序列数据库)](#13-3influxDB(分布式时间序列数据库))
-> - [13-4.cAdvisor(监控Docker容器)](#13-4cAdvisor(监控Docker容器))
-> - [13-5.Grafana(可视化面板,查看容器参数)](#13-5Grafana(可视化面板,查看容器参数))
+> - [13-3.influxDB分布式时间序列数据库](#13-3influxDB分布式时间序列数据库)
+> - [13-4.cAdvisor监控Docker容器](#13-4cAdvisor监控Docker容器)
+> - [13-5.Grafana可视化面板,查看容器参数](#13-5Grafana可视化面板,查看容器参数)
 > - [13-6.预警通知设置](#13-6预警通知设置)
 
 
@@ -102,7 +102,7 @@
 |xxxPoJo|某实体类| ![Result](https://github.com/panchaopeng/pcp_parent/blob/master/img/common/1.common.pojo.png)|
 |BaseExceptionHandler|模块的统一异常处理|![BaseExceptionHandler](https://github.com/panchaopeng/pcp_parent/blob/master/img/common/1.common.exception.png)|  
 
-### 1-3.基于twitter的snowflake（雪花）算法-分布式ID生成器
+### 1-3.基于twitter的snowflake雪花算法-分布式ID生成器
 
 > - 为什么要使用**分布式ID生成器**？为什么不使用数据库的本身的自增ID？
 >> - 因为微服务大多数都触及分布式开发，需要确保整个分布式系统内不产生重复的ID
@@ -300,7 +300,7 @@
 |![RabbitMQ](https://github.com/panchaopeng/pcp_parent/blob/master/img/RabbitMQ/yml.png)|  
 
 
-### 6-2.RabbitMQ-直接模式(Direct)
+### 6-2.RabbitMQ-直接模式Direct
 
 > - 具体查看文件：[消息生产者](https://github.com/panchaopeng/pcp_parent/blob/master/pcp_rabbitmq/src/test/java/com/pcp/test/ProducerTest.java),[消息消费者](https://github.com/panchaopeng/pcp_parent/tree/master/pcp_rabbitmq/src/main/java/com/pcp/rabbit/com/pcp/rabbit/customer)  
 > - 直接模式（Direct）：将消息发给唯一一个节点时使用这种模式
@@ -314,7 +314,7 @@
 |消息消费者|![消息消费者](https://github.com/panchaopeng/pcp_parent/blob/master/img/RabbitMQ/direct_consumer.png)|  
 
 
-### 6-3.RabbitMQ-分列模式(Fanout)
+### 6-3.RabbitMQ-分列模式Fanout
 
 > - PS:此时已经新建路由ex_it，并绑定了itcast2和itcast3两个队列  
 > - 分列模式(Fanout)
@@ -331,7 +331,7 @@
 |消息消费者|![消息消费者](https://github.com/panchaopeng/pcp_parent/blob/master/img/RabbitMQ/fanout_con2.png)|  
 
 
-### 6-4.RabbitMQ-主题模式(Topic)
+### 6-4.RabbitMQ-主题模式Topic
 
 > - 主题模式(Topic)
 >> - 任何发送到Topic Exchange的消息都会被转发到所有关心RouteKey中指定话题的Queue上
@@ -515,7 +515,7 @@
 |启动类配置|![EnableEurekaServer](https://github.com/panchaopeng/pcp_parent/blob/master/img/eureka/EnableEurekaClient.png)|  
 
 
-### 9-2.Feign(实现服务间的调用)
+### 9-2.Feign实现服务间的调用
 
 > - 为什么需要Feign?因为服务间通常需要交互，而每个微服务的端口号又都不一致，因此需要Feign通过yml的application name进行调用
 
@@ -538,7 +538,7 @@
 |Controller中注入client并调用接口方法|![baseClient](https://github.com/panchaopeng/pcp_parent/blob/master/img/eureka/baseClient.png)|  
 
 
-### 9-3.Hystrix(熔断器)
+### 9-3.Hystrix熔断器
 
 > - 基础服务的故障可能会导致**级联故障**，进而造成整个系统不可用的情况，这种现象被称为服务雪崩效应
 > - Hystrix 能使你的系统在出现**依赖服务失效**的时候，通过**隔离系统所依赖的服务**，防止服务级联失败，同时提供失败回退机制
@@ -551,7 +551,7 @@
 
 ##
 
-## 9-4.Zuul(微服务网关)
+## 9-4.Zuul微服务网关
 
 > - 微服务网关是介于客户端和服务器端之间的中间层，所有的外部请求都会先经过微服务网关
 > - Zuul组件的核心是一系列的过滤器
@@ -592,7 +592,7 @@
 
 ## 
 
-## 9-5.SpringCloudConfig(分布式配置中心)与SpringCloudBus(消息总线组件)
+## 9-5.SpringCloudConfig分布式配置中心与SpringCloudBus消息总线组件
 
 > - SpringCloudBus，不重启微服务的情况下更新配置(拉取码云上SpringCloudConfig的yml文件)
 > - 使用Git仓库存放yml配置文件(比如[**码云**](https://gitee.com/))
@@ -689,7 +689,7 @@
 
 ##
 
-## 11.如何将微服务自动部署并打包成镜像？
+## 11.如何将微服务自动部署并打包成镜像
 
 > - 利用DockerMaven插件生成镜像并上传镜像到Docker私有仓库
 
@@ -761,7 +761,7 @@
 |浏览|http://ip:3000|  
 
 
-### 12-2.Jenkins(实现持续集成)
+### 12-2.Jenkins实现持续集成
 
 > - 以图形化界面连接Gogs的git代码，并将某个微服务生成镜像并上传到docker私有仓库
 > - 必须保证系统有jdk
@@ -795,7 +795,7 @@
 > - Grafana：以图形化方式查看容器数据
 
 
-### 13-1.Rancher(容器管理工具)
+### 13-1.Rancher容器管理工具
 
 > - 容器部署及管理平台,一键式应用部署和管理
 
@@ -819,7 +819,7 @@
 |3.复制触发地址，备用||  
 
 
-### 13-3.influxDB(分布式时间序列数据库)
+### 13-3.influxDB分布式时间序列数据库
 
 > - 存储cAdvisor组件所提供的监控信息
 
@@ -838,7 +838,7 @@
 |4.查看采集的数据|切换到cadvisor数据库,SHOW MEASUREMENTS.由于没有安装cAdvisor，所以看不到数据|  
 
 
-### 13-4.cAdvisor(监控Docker容器)
+### 13-4.cAdvisor监控Docker容器
 
 > - 采集Docker容器的数据，尤其是使用内存
 
@@ -850,7 +850,7 @@
 |访问|http://ip:8080/containers/|  
 
 
-### 13-5.Grafana(可视化面板,查看容器参数)
+### 13-5.Grafana可视化面板,查看容器参数
 
 > - 以图形化的方式查看cAdvisor采集到的容器数据
 
