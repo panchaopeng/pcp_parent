@@ -616,6 +616,216 @@
 ##
 
 
+## 12.Docker私有仓库搭建与配置
+
+
+|说明|备注|
+|:-----:|:------:|
+|拉取私有仓库镜像|docker pull registry|
+|启动私有仓库容器|docker run ‐di ‐‐name=registry ‐p 5000:5000 registry|
+|浏览|http://ip:5000/v2/\_catalog|
+|让docker信任私有仓库地址|vi /etc/docker/daemon.json,保存并退出:{"insecure‐registries":["ip:5000"]}|
+|重启docker 服务|systemctl restart docker|  
+
+
+##
+
+## 13.如何将微服务自动部署并打包成镜像？
+
+> - 利用DockerMaven插件生成镜像并上传镜像到Docker私有仓库
+
+|说明|备注|
+|:-----:|:------:|
+|修改宿主机的docker配置，让其可以远程访问|vi /lib/systemd/system/docker.service，其中ExecStart=后添加配置 ‐H tcp://0.0.0.0:2375 ‐H unix:///var/run/docker.sock|
+|刷新配置，重启服务|systemctl daemon‐reload、systemctl restart docker、docker start registry|  
+
+> - 以上配置会自动生成Dockerfile
+>> - FROM jdk8
+>> - ADD app.jar /
+>> - ENTRYPOINT ["java","‐jar","/app.jar"]
+
+```
+<!-- MavenPlugin 使微服务生成镜像并上传到私有仓库 -->
+    <build>
+        <finalName>app</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <!-- docker的maven插件，官网：
+            https://github.com/spotify/docker-maven-plugin -->
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.4.13</version>
+                <configuration>
+		    <!-- docker私有仓库地址 -->
+                    <imageName>192.168.200.129:5000/${project.artifactId}:${project.version}</imageName>
+		    <!-- 打包前必须要存在基础镜像：jdk8镜像，因为微服务都是依赖jdk的 -->
+                    <baseImage>jdk8</baseImage>
+                    <entryPoint>["java","‐jar","/${project.build.finalName}.jar"]</entryPoint>
+                    <resources>                   
+                        <resource>                        
+                            <targetPath>/</targetPath>             
+                            <directory>${project.build.directory}</directory>                    
+                            <include>${project.build.finalName}.jar</include>
+                        </resource>             
+                    </resources>
+                    <dockerHost>http://192.168.200.129:2375</dockerHost>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+```
+
+> - 最后，进入要生成镜像的微服务，在Terminal输入命令：mvn clean package docker:build  ‐DpushImage
+> - 上面的打包方式还是太繁琐了，因为还要手动敲命令，下面会讲解持续集成来生成镜像
+
+
+
+##
+
+## 14.持续集成
+
+> - 自动化的周期性的集成测试过程
+
+### 14-1.Gogs安装与配置
+
+> - 搭建自助 Git 服务
+> - 目的是将idea代码上传到Gogs git
+
+|说明|备注|
+|:-----:|:------:|
+|下载镜像|docker pull gogs/gogs|
+|创建容器|docker run ‐d ‐‐name=gogs ‐p 10022:22 ‐p 3000:3000 ‐v /var/gogsdata:/data gogs/gogs|
+|浏览|http://ip:3000|  
+
+
+### 14-2.Jenkins(实现持续集成)
+
+> - 以图形化界面连接Gogs的git代码，并将某个微服务生成镜像并上传到docker私有仓库
+> - 必须保证系统有jdk
+
+|说明|备注|
+|:-----:|:------:|
+|下载jenkins|wget https://pkg.jenkins.io/redhat/jenkins‐2.83‐1.1.noarch.rpm|
+|配置jenkins|vi /etc/sysconfig/jenkins|
+|修改用户和端口|JENKINS_USER="root"、JENKINS_PORT="8888"|
+|启动服务|systemctl start jenkins|
+|访问链接|http://ip:8888|
+|进入界面-系统管理-管理插件-可选插件|安装Maven Integration和Git插件|
+|进入界面-系统管理-全局工具配置|安装Maven与本地仓库(将开发时的Maven仓库传上来)以及JDK|
+|这样就可以构建Maven项目了||
+|1.回到首页，点击新建按钮|![newMaven](https://github.com/panchaopeng/pcp_parent/blob/master/img/jenkins/newMaven.png)|
+|2.源码管理，选择Git|![git](https://github.com/panchaopeng/pcp_parent/blob/master/img/jenkins/git.png)|
+|3.Build|![newMaven](https://github.com/panchaopeng/pcp_parent/blob/master/img/jenkins/newMaven.png)|
+|PS:|clean package docker:build ‐DpushImage 用于清除、打包，构建docker镜像,最后保存|
+|4.返回首页，创建的任务|点击右边的绿色箭头按钮，即可执行此任务|
+|5.查看docker私有仓库|http://ip:5000/v2/\_catalog,发现该微服务已经生成了镜像了|   
+
+
+## 
+
+## 15.容器管理与容器监控
+
+> - 14节我们已经在图形化界面生成了镜像，同理，我们也可以在图形化界面启动容器并管理
+> - Rancher:管理容器的start/stop/delete
+> - influxDB:存储cAdvisor采集的容器数据
+> - cAdvisor：采集容器数据，将其存储到influxDB
+> - Grafana：以图形化方式查看容器数据
+
+
+### 15-1.Rancher(容器管理工具)
+
+> - 容器部署及管理平台,一键式应用部署和管理
+
+|说明|备注|
+|:-----:|:------:|
+|下载Rancher 镜像|docker pull rancher/server|
+|创建Rancher容器|docker run ‐d ‐‐name=rancher ‐‐restart=always ‐p 9090:8080 rancher/server|
+|访问链接|http://ip:9090|
+|左上角的Default -->环境管理|创建各种环境:开发、测试、生产|
+|基础架构-镜像库|custom-地址：填写ip|
+|基础架构-主机|添加主机-拷贝脚本-并在服务器上运行该脚本|
+|选择创建的环境-添加应用|也即以图形化的界面配置镜像并启动容器了|  
+
+
+### 15-2.微服务扩容与缩容
+
+|说明|备注|
+|:-----:|:------:|
+|1.创建微服务的时候，不设置端口映射||
+|2.回到Rancher界面,API-WebHooks-添加接收器|填写名称、类型(扩/缩容)、目标服务、步长。|
+|3.复制触发地址，备用||  
+
+
+### 15-3.influxDB(分布式时间序列数据库)
+
+> - 存储cAdvisor组件所提供的监控信息
+
+|说明|备注|
+|:-----:|:------:|
+|1.下载镜像|docker pull tutum/influxdb|
+|2.创建容器|docker run -di -p 8083:8083 ‐p 8086:8086 --expose 8090 --expose 8099 --name=influxsrv tutum/influxdb|
+|PS：|端口概述：8083端口:web访问端口、8086:数据写入端口|
+|访问|http://ip:8083/|  
+
+|常用操作,右上角有快捷选项|备注|
+|:-----:|:------:|
+|1.创建数据库|CREATE DATABASE "cadvisor" /  SHOW DATABASES|
+|2.创建用户并授权|CREATE USER "cadvisor" WITH PASSWORD 'cadvisor' WITH ALL PRIVILEGES / SHOW USRES|
+|3.用户授权|grant all privileges on cadvisor to cadvisor 、grant WRITE on cadvisor to cadvisor 、grant READ on cadvisor to cadvisor|
+|4.查看采集的数据|切换到cadvisor数据库,SHOW MEASUREMENTS.由于没有安装cAdvisor，所以看不到数据|  
+
+
+### 15-4.cAdvisor(监控Docker容器)
+
+> - 采集Docker容器的数据，尤其是使用内存
+
+|说明|备注|
+|:-----:|:------:|
+|1.下载镜像|docker pull google/cadvisor|
+|2.创建容器|docker run ‐‐volume=/:/rootfs:ro ‐‐volume=/var/run:/var/run:rw ‐‐
+volume=/sys:/sys:ro ‐‐volume=/var/lib/docker/:/var/lib/docker:ro ‐‐
+publish=8080:8080 ‐‐detach=true ‐‐link influxsrv:influxsrv ‐‐name=cadvisor 
+google/cadvisor ‐storage_driver=influxdb ‐storage_driver_db=cadvisor ‐
+storage_driver_host=influxsrv:8086|
+|PS：|influxsrv是influxdb容器，cadvisor是influxsrv容器创建的数据库|
+|访问|http://ip:8080/containers/|  
+
+
+### 15-5.Grafana(可视化面板,查看容器参数)
+
+> - 以图形化的方式查看cAdvisor采集到的容器数据
+
+|说明|备注|
+|:-----:|:------:|
+|1.下载镜像|docker pull google/cadvisor|
+|2.创建容器|docker run ‐d ‐p 3001:3000  ‐e INFLUXDB_HOST=influxsrv ‐e 
+INFLUXDB_PORT=8086 ‐e INFLUXDB_NAME=cadvisor ‐e INFLUXDB_USER=cadvisor ‐e 
+INFLUXDB_PASS=cadvisor ‐‐link influxsrv:influxsrv ‐‐name grafana 
+grafana/grafana|
+|PS：|influxsrv是influxdb容器，cadvisor是influxsrv容器创建的数据库,还有同名的user/pass|
+|访问|http://ip:3001/containers/|
+|使用||
+|1.添加数据源,点击设置，Data Sources-Add data source|![source](https://github.com/panchaopeng/pcp_parent/blob/master/img/graph/source.png)![detail](https://github.com/panchaopeng/pcp_parent/blob/master/img/graph/detail.png)|
+|2.添加仪表盘，Manage-Dashboadr-Add-Graph-Panel Title-Edit,查询内存，选择容器名称，保存|![general](https://github.com/panchaopeng/pcp_parent/blob/master/img/graph/general.png)![metrics](https://github.com/panchaopeng/pcp_parent/blob/master/img/graph/metrics.png)|  
+
+
+### 15-6.预警通知设置
+|说明|备注|
+|:-----:|:------:|
+|1.alerting-Notification channels-Add channel|![notification](https://github.com/panchaopeng/pcp_parent/blob/master/img/graph/notification.png)|
+|PS:|url地址是[15-2.微服务扩容与缩容]所备用的扩/缩容地址|
+|2.仪表盘预警设置,也即多少M后触发扩/缩容|![alert](https://github.com/panchaopeng/pcp_parent/blob/master/img/graph/alert.png)![notify](https://github.com/panchaopeng/pcp_parent/blob/master/img/graph/notify.png)|  
+
+##
+
+
+
+
+
 
 
 
