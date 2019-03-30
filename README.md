@@ -786,11 +786,7 @@
 |说明|备注|
 |:-----:|:------:|
 |1.下载镜像|docker pull google/cadvisor|
-|2.创建容器|docker run ‐‐volume=/:/rootfs:ro ‐‐volume=/var/run:/var/run:rw ‐‐
-volume=/sys:/sys:ro ‐‐volume=/var/lib/docker/:/var/lib/docker:ro ‐‐
-publish=8080:8080 ‐‐detach=true ‐‐link influxsrv:influxsrv ‐‐name=cadvisor 
-google/cadvisor ‐storage_driver=influxdb ‐storage_driver_db=cadvisor ‐
-storage_driver_host=influxsrv:8086|
+|2.创建容器|docker run ‐‐volume=/:/rootfs:ro ‐‐volume=/var/run:/var/run:rw ‐‐volume=/sys:/sys:ro ‐-volume=/var/lib/docker/:/var/lib/docker:ro ‐‐publish=8080:8080 ‐‐detach=true ‐‐link influxsrv:influxsrv ‐‐name=cadvisor google/cadvisor ‐storage_driver=influxdb ‐storage_driver_db=cadvisor ‐storage_driver_host=influxsrv:8086|
 |PS：|influxsrv是influxdb容器，cadvisor是influxsrv容器创建的数据库|
 |访问|http://ip:8080/containers/|  
 
@@ -802,10 +798,7 @@ storage_driver_host=influxsrv:8086|
 |说明|备注|
 |:-----:|:------:|
 |1.下载镜像|docker pull google/cadvisor|
-|2.创建容器|docker run ‐d ‐p 3001:3000  ‐e INFLUXDB_HOST=influxsrv ‐e 
-INFLUXDB_PORT=8086 ‐e INFLUXDB_NAME=cadvisor ‐e INFLUXDB_USER=cadvisor ‐e 
-INFLUXDB_PASS=cadvisor ‐‐link influxsrv:influxsrv ‐‐name grafana 
-grafana/grafana|
+|2.创建容器|docker run ‐d ‐p 3001:3000  ‐e INFLUXDB_HOST=influxsrv ‐e INFLUXDB_PORT=8086 ‐e INFLUXDB_NAME=cadvisor ‐e INFLUXDB_USER=cadvisor ‐e INFLUXDB_PASS=cadvisor ‐‐link influxsrv:influxsrv ‐‐name grafana grafana/grafana|
 |PS：|influxsrv是influxdb容器，cadvisor是influxsrv容器创建的数据库,还有同名的user/pass|
 |访问|http://ip:3001/containers/|
 |使用||
