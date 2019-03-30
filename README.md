@@ -10,8 +10,8 @@
 # 目录
 - [0.准备后台开发文档](#0准备后台开发文档)
 - [1.关于后台公共模块](#1关于后台公共模块)
--- [1-1.全局的返回结果实体类](#1-1全局的返回结果实体类)
--- [1-2.全部模块采用SpringMVC模式](#1-2全部模块采用SpringMVC模式)
+> - [1-1.全局的返回结果实体类](#1-1全局的返回结果实体类)
+> - [1-2.全部模块采用SpringMVC模式](#1-2全部模块采用SpringMVC模式)
 -- [1-3.基于twitter的snowflake（雪花）算法-分布式ID生成器](1-3基于twitter的snowflake（雪花）算法-分布式ID生成器)
 - [2.Spring Data JPA](#2Spring-Data-JPA)
 -- [2-1.SpringDataJPA依赖与配置](#2-1SpringDataJPA依赖与配置)
