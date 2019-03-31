@@ -5,7 +5,7 @@
   
 |架构图|
 |:--------:|
-|![all](https://github.com/panchaopeng/pcp_parent/blob/master/img/all/all.png)| 
+|![cloud](https://github.com/panchaopeng/pcp_parent/blob/master/img/cloud/cloud.png)| 
 
 ##
 
