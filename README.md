@@ -2,10 +2,12 @@
 
 - ### 基于SpringBoot+SpringCloud+SpringMVC+SpringDataJPA的微服务Demo说明  
   > - 开发环境：IDEA、jdk 1.8、mysql 5.7、maven、CentOS 7、docker、Postman等
+  > - 常用镜像: [images.png](https://github.com/panchaopeng/pcp_parent/blob/master/img/cloud/images.png)
+  > - 镜像常用端口及一些docker命令：[images.txt](https://github.com/panchaopeng/pcp_parent/blob/master/img/doc笔记/images.txt)
   
 |架构图|
 |:--------:|
-|![all](https://github.com/panchaopeng/pcp_parent/blob/master/img/all/all.png)| 
+|![cloud](https://github.com/panchaopeng/pcp_parent/blob/master/img/cloud/cloud.png)| 
 
 ##
 
@@ -860,7 +862,7 @@
 
 |说明|备注|
 |:-----:|:------:|
-|1.下载镜像|docker pull google/cadvisor|
+|1.下载镜像|docker pull grafana/grafana|
 |2.创建容器|docker run ‐d ‐p 3001:3000  ‐e INFLUXDB_HOST=influxsrv ‐e INFLUXDB_PORT=8086 ‐e INFLUXDB_NAME=cadvisor ‐e INFLUXDB_USER=cadvisor ‐e INFLUXDB_PASS=cadvisor ‐‐link influxsrv:influxsrv ‐‐name grafana grafana/grafana|
 |PS：|influxsrv是influxdb容器，cadvisor是influxsrv容器创建的数据库,还有同名的user/pass|
 |访问|http://ip:3001/containers/|
