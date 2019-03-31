@@ -1,8 +1,11 @@
 # IDEA后台微服务架构:
 
 - ### 基于SpringBoot+SpringCloud+SpringMVC+SpringDataJPA的微服务Demo说明  
-  > - 开发环境：IDEA、jdk 1.8、mysql 5.7、maven、CentOS 7、docker、Postman
-  > - 如源码所示，每个文件夹都是一个微服务
+  > - 开发环境：IDEA、jdk 1.8、mysql 5.7、maven、CentOS 7、docker、Postman等
+  
+|架构图|
+|:--------:|
+|![all](https://github.com/panchaopeng/pcp_parent/blob/master/img/all/all.png)| 
 
 ##
 
