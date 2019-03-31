@@ -3,7 +3,7 @@
 - ### 基于SpringBoot+SpringCloud+SpringMVC+SpringDataJPA的微服务Demo说明  
   > - 开发环境：IDEA、jdk 1.8、mysql 5.7、maven、CentOS 7、docker、Postman等
   > - 常用镜像: [images.png](https://github.com/panchaopeng/pcp_parent/blob/master/img/cloud/images.png)
-  > - 镜像常用端口及一些docker命令：[images.txt](https://github.com/panchaopeng/pcp_parent/blob/master/img/doc笔记/images.txt)
+  > - 镜像常用端口及一些docker命令：[images.txt](https://github.com/panchaopeng/pcp_parent/blob/master/doc笔记/images.txt)
   
 |架构图|
 |:--------:|
