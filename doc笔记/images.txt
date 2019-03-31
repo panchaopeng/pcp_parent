@@ -1,0 +1,98 @@
+镜像：centos/mysql-57-centos7
+端口：3306
+添加环境变量  MYSQL_ROOT_PASSWORD=123456 
+
+相当于：
+docker run -di --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 centos/mysql-57-centos7
+
+-----------------------------------
+
+镜像：rabbitmq:management     
+端口映射5671   5672  4369    15671  15672  25672
+浏览器访问   http://192.168.184.136:15672/
+
+-----------------------------------
+
+镜像：redis
+端口映射6379 
+
+-----------------------------------
+
+镜像：mongo
+端口映射27017 
+
+-----------------------------------
+
+镜像：elasticsearch:5.6.8
+端口映射9300   9200
+浏览器测试： http://192.168.184.136:9200/
+
+-----------------------------------
+
+###################
+
+Docker私有仓库镜像：registry
+
+docker run -di --name=registry -p 5000:5000 registry
+
+http://192.168.184.135:5000/v2/_catalog 
+
+
+###################
+
+自助 Git服务镜像：gogs/gogs
+
+docker run -d --name=gogs -p 10022:22 -p 3000:3000 -v /var/gogsdata:/data gogs/gogs
+
+http://192.168.184.135:3000
+
+###################
+
+
+================================
+
+Rancher 镜像：rancher/server
+
+docker run -d --name=rancher --restart=always -p 9090:8080 rancher/server
+
+ http://192.168.184.136:9090
+
+================================
+
+influxDB镜像：tutum/influxdb
+
+docker run -di -p 8083:8083 ‐p 8086:8086 --expose 8090 --expose 8099 --name=influxsrv tutum/influxdb
+
+http://ip:8083/
+
+================================
+
+cAdvisor镜像：google/cadvisor
+
+docker run ‐‐volume=/:/rootfs:ro ‐‐volume=/var/run:/var/run:rw ‐‐volume=/sys:/sys:ro ‐-volume=/var/lib/docker/:/var/lib/docker:ro ‐‐publish=8080:8080 ‐‐detach=true ‐‐link influxsrv:influxsrv ‐‐name=cadvisor google/cadvisor ‐storage_driver=influxdb ‐storage_driver_db=cadvisor ‐storage_driver_host=influxsrv:8086
+
+http://ip:8080/containers/
+
+
+================================
+
+Grafana镜像：grafana/grafana
+
+docker run ‐d ‐p 3001:3000  ‐e INFLUXDB_HOST=influxsrv ‐e INFLUXDB_PORT=8086 ‐e INFLUXDB_NAME=cadvisor ‐e INFLUXDB_USER=cadvisor ‐e INFLUXDB_PASS=cadvisor ‐‐link influxsrv:influxsrv ‐‐name grafana grafana/grafana
+
+http://ip:3001/containers/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
